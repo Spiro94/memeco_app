@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "596013733093",
+    "project_id": "memeco-d3897",
+    "storage_bucket": "memeco-d3897.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:596013733093:android:63c8dd8749c0dfe1dc300c",
+        "android_client_info": {
+          "package_name": "com.daniel.villamizar.memeco"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "596013733093-chjmtsav3mk1uuaos1on4a3bj735v722.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.daniel.villamizar.memeco",
+            "certificate_hash": "851fbf3d907fc126b8b7a57c386348ab289ad126"
+          }
+        },
+        {
+          "client_id": "596013733093-mfqjel1l5jl6rmdo46an3tdkf1ae1p90.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.daniel.villamizar.memeco",
+            "certificate_hash": "d42b822d411a54b3351c5c466dd7045d75fe46f3"
+          }
+        },
+        {
+          "client_id": "596013733093-2ne2ehmircl7hnvabkgbp6jppeva9jht.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1ktT6xxjnsaUIBU4-kJf1s9NeWAqij3Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "596013733093-2ne2ehmircl7hnvabkgbp6jppeva9jht.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "596013733093-e8m8j3q587vqrt39ogtov2soe3ed9vf7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.memeco"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:596013733093:android:b45ba34030b51819dc300c",
+        "android_client_info": {
+          "package_name": "daniel.villamizar.memeco"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "596013733093-2ne2ehmircl7hnvabkgbp6jppeva9jht.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1ktT6xxjnsaUIBU4-kJf1s9NeWAqij3Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "596013733093-2ne2ehmircl7hnvabkgbp6jppeva9jht.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "596013733093-e8m8j3q587vqrt39ogtov2soe3ed9vf7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.memeco"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
