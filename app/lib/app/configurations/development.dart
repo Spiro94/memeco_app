@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/foundation.dart';
 import 'package:logging/logging.dart' as logging;
 
@@ -11,13 +13,15 @@ import 'configuration.dart';
 void main() {
   const siteHost = String.fromEnvironment('SITE_HOST');
 
+  log('siteHost: $siteHost');
+
   final configuration = AppConfiguration(
     appLocale: AppLocale.en,
     logLevel: logging.Level.ALL,
     theme: OutsideThemes.lightTheme,
     deepLinkBaseUri: kIsWeb
         ? 'http://$siteHost:3000'
-        : 'com.gadfly361.gadflyfluttertemplate.deep://deeplink-callback',
+        : 'daniel.villamizar.memeco.deep://deeplink-callback',
     clientProvidersConfigurations: ClientProvidersConfigurations(
       sentry: null,
       supabase: const Supabase_ClientProvider_Configuration(

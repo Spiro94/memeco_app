@@ -55,7 +55,10 @@ class MockedApp extends FTMockedApp<MocksContainer> {
 }
 
 class MocksContainer {
-  final repositories = Repositories_All(authRepository: MockAuthRepository());
+  final repositories = Repositories_All(
+    authRepository: MockAuthRepository(),
+    memeRepository: MockMemeRepository(),
+  );
 
   final effectProviders = EffectProviders_All(
     authChangeEffectProvider: MockAuthChangeEffectProvider(),

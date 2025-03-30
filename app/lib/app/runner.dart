@@ -17,6 +17,7 @@ import '../outside/effect_providers/auth_change/effect_provider.dart';
 import '../outside/effect_providers/mixpanel/effect_provider.dart';
 import '../outside/repositories/all.dart';
 import '../outside/repositories/auth/repository.dart';
+import '../outside/repositories/posts/repository.dart';
 import 'builder.dart';
 import 'configurations/configuration.dart';
 
@@ -75,6 +76,9 @@ Future<void> appRunner({
       deepLinkBaseUri: configuration.deepLinkBaseUri,
       mixpanelEffectProvider: effectProviders.mixpanelEffectProvider,
       sentryClientProvider: clientProviders.sentryClientProvider,
+      supabaseClient: clientProviders.supabaseClientProvider.client,
+    ),
+    memeRepository: Meme_Repository(
       supabaseClient: clientProviders.supabaseClientProvider.client,
     ),
   );

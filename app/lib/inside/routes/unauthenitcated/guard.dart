@@ -18,7 +18,7 @@ class Unauthenticated_Guard extends AutoRouteGuard with SharedMixin_Logging {
       resolver.next();
     } else {
       log.info('already authenticated');
-      router.root.replaceAll(const [Home_Route()]);
+      router.root.replaceAll(const [HomeShell_Route()]);
     }
   }
 }

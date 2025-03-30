@@ -10,6 +10,12 @@
       "request": "launch",
       "type": "dart",
       "program": "lib/app/configurations/development.dart",
+      "env": {
+        "SITE_HOST": "192.168.1.86",
+        "SITE_URL_HTTP": "http://192.168.1.86:3000",
+        "SITE_URL_HTTPS": "https://192.168.1.86:3000",
+        "EDGE_FUNCTION_SECRET": "my-edge-function-secret"
+      },
       "args": [
         "--target",
         "lib/app/configurations/development.dart",
@@ -19,7 +25,7 @@
         "3000",
         "--web-hostname=${env:SITE_HOST}",
         "--dart-define",
-        "SITE_HOST=${env:SITE_HOST}"
+        "SITE_HOST=192.168.1.86"
       ]
     },
     {

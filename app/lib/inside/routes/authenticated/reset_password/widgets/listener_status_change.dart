@@ -43,7 +43,7 @@ class ResetPassword_Listener_StatusChange extends StatelessWidget {
           case ResetPassword_Status.resetPasswordSuccess:
             {
               context.router.navigate(
-                const Home_Route(),
+                const HomeShell_Route(),
               );
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(

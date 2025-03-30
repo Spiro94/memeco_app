@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'auth/repository.dart';
 import 'base.dart';
+import 'posts/repository.dart';
 
 /// When adding a new repository, be sure to add it to:
 /// - [getList]
@@ -11,9 +12,11 @@ import 'base.dart';
 class Repositories_All {
   const Repositories_All({
     required this.authRepository,
+    required this.memeRepository,
   });
 
   final Auth_Repository authRepository;
+  final Meme_Repository memeRepository;
 
   List<Repository_Base> getList() => [
         authRepository,
@@ -22,6 +25,7 @@ class Repositories_All {
   List<RepositoryProvider<Repository_Base>> createProviders() {
     return [
       RepositoryProvider<Auth_Repository>.value(value: authRepository),
+      RepositoryProvider<Meme_Repository>.value(value: memeRepository),
     ];
   }
 

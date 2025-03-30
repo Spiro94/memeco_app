@@ -2,7 +2,7 @@ import 'package:flow_test/flow_test.dart';
 import 'package:flutter_test/flutter_test.dart' hide expect;
 import 'package:memeco/inside/blocs/auth/events.dart';
 import 'package:memeco/inside/blocs/sign_in/events.dart';
-import 'package:memeco/inside/routes/authenticated/home/page.dart';
+import 'package:memeco/inside/routes/authenticated/home_flow/feed/page.dart';
 import 'package:memeco/inside/routes/unauthenitcated/sign_in/widgets/button_submit.dart';
 import 'package:memeco/inside/routes/unauthenitcated/sign_in/widgets/input_email.dart';
 import 'package:memeco/inside/routes/unauthenitcated/sign_in/widgets/input_password.dart';
@@ -140,7 +140,7 @@ void main() {
         },
         expectations: (expectations) {
           expectations.expect(
-            find.byType(Home_Page),
+            find.byType(HomeFeed_Page),
             findsOneWidget,
             reason: 'Should be on the home page',
           );

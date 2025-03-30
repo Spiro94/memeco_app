@@ -23,7 +23,7 @@ class Routes_Listener_AuthStatusChange extends StatelessWidget {
           case Auth_Status.unauthentcated:
             context.router.root.replaceAll([const SignIn_Route()]);
           case Auth_Status.authenticated:
-            context.router.root.replaceAll([const Home_Route()]);
+            context.router.root.replaceAll([const HomeShell_Route()]);
         }
       },
       child: child,

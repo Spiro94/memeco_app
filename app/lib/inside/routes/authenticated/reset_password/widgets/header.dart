@@ -18,7 +18,7 @@ class ResetPassword_Header extends StatelessWidget {
       prefixActions: [
         FHeaderAction.back(
           onPress: () {
-            context.router.navigate(const Home_Route());
+            context.router.navigate(const HomeShell_Route());
           },
         ),
       ],

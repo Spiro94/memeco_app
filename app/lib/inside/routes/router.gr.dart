@@ -75,17 +75,33 @@ class ForgotPassword_Route extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [Home_Page]
-class Home_Route extends PageRouteInfo<void> {
-  const Home_Route({List<PageRouteInfo>? children})
-    : super(Home_Route.name, initialChildren: children);
+/// [HomeFeed_Page]
+class HomeFeed_Route extends PageRouteInfo<void> {
+  const HomeFeed_Route({List<PageRouteInfo>? children})
+    : super(HomeFeed_Route.name, initialChildren: children);
 
-  static const String name = 'Home_Route';
+  static const String name = 'HomeFeed_Route';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return WrappedRoute(child: const Home_Page());
+      return const HomeFeed_Page();
+    },
+  );
+}
+
+/// generated route for
+/// [HomeShell_Page]
+class HomeShell_Route extends PageRouteInfo<void> {
+  const HomeShell_Route({List<PageRouteInfo>? children})
+    : super(HomeShell_Route.name, initialChildren: children);
+
+  static const String name = 'HomeShell_Route';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return WrappedRoute(child: const HomeShell_Page());
     },
   );
 }

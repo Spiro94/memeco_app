@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
-import '../../../../i18n/translations.g.dart';
+import '../../../../../i18n/translations.g.dart';
 import 'icon_sign_out.dart';
 
 class Home_Header extends StatelessWidget {
