@@ -7,3 +7,8 @@ SELECT vault.create_secret(
   'my-edge-function-secret', 
   'EDGE_FUNCTION_SECRET', 
   'Edge function secret key');
+
+
+INSERT INTO storage.buckets(id, name)
+VALUES ('images', 'images')
+ON CONFLICT (id) DO NOTHING;
