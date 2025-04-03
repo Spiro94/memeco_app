@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'state.g.dart';
 
-enum MemeUpload_Status { idle, loading, success, failure }
+enum MemeUpload_Status { idle, loading, success, failure, imageNotSafe }
 
 @JsonSerializable()
 class MemeUpload_State extends Equatable {

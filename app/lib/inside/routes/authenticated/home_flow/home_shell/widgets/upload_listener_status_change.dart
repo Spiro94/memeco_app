@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:forui/forui.dart';
@@ -23,6 +24,7 @@ class MemeUpload_Listener_StatusChange extends StatelessWidget {
         switch (state.status) {
           case MemeUpload_Status.failure:
             {
+              // context.maybePop();
               final scaffoldBackgroundColor =
                   context.theme.scaffoldStyle.backgroundColor;
               if (state.errorMessage != null) {
@@ -40,6 +42,7 @@ class MemeUpload_Listener_StatusChange extends StatelessWidget {
 
           case MemeUpload_Status.success:
             {
+              context.maybePop();
               final scaffoldBackgroundColor =
                   context.theme.scaffoldStyle.backgroundColor;
               ScaffoldMessenger.of(context).showSnackBar(
@@ -55,6 +58,22 @@ class MemeUpload_Listener_StatusChange extends StatelessWidget {
               context
                   .read<MemeFeed_Bloc>()
                   .add(const MemeFeed_Event_FetchMemes());
+            }
+
+          case MemeUpload_Status.imageNotSafe:
+            {
+              context.maybePop();
+              final scaffoldBackgroundColor =
+                  context.theme.scaffoldStyle.backgroundColor;
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  backgroundColor: scaffoldBackgroundColor,
+                  content: FAlert(
+                    title: const Text('Image is not safe for upload'),
+                    style: FAlertStyle.destructive,
+                  ),
+                ),
+              );
             }
 
           case MemeUpload_Status.loading:

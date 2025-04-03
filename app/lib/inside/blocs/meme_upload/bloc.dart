@@ -17,16 +17,27 @@ class MemeUpload_Bloc extends Bloc<MemeUpload_Event, MemeUpload_State> {
   ) async {
     emit(state.copyWith(status: MemeUpload_Status.loading));
     try {
-      await memeRepository.uploadMeme(
+      final result = await memeRepository.uploadMeme(
         title: event.title,
         imageFile: event.imageFile,
       );
-      emit(state.copyWith(status: MemeUpload_Status.success));
+      if (result) {
+        emit(state.copyWith(status: MemeUpload_Status.success));
+      } else {
+        emit(
+          state.copyWith(
+            status: MemeUpload_Status.imageNotSafe,
+            errorMessage: 'Image is not safe for upload',
+          ),
+        );
+      }
     } catch (error) {
-      emit(state.copyWith(
-        status: MemeUpload_Status.failure,
-        errorMessage: error.toString(),
-      ));
+      emit(
+        state.copyWith(
+          status: MemeUpload_Status.failure,
+          errorMessage: error.toString(),
+        ),
+      );
     } finally {
       emit(state.copyWith(status: MemeUpload_Status.idle));
     }

@@ -1,0 +1,25 @@
+{
+  "version": "4",
+  "specifiers": {
+    "jsr:@openai/openai@^4.90.0": "4.90.0",
+    "npm:zod@3": "3.24.2"
+  },
+  "jsr": {
+    "@openai/openai@4.90.0": {
+      "integrity": "1f9ed14ca08c5627831d371d56cf44ef69fe0c08c27c9d4f2f27a34aa873f715",
+      "dependencies": [
+        "npm:zod"
+      ]
+    }
+  },
+  "npm": {
+    "zod@3.24.2": {
+      "integrity": "sha512-lY7CDW43ECgW9u1TcT3IoXHflywfVqDYze4waEz812jR/bZ8FHDsl7pFQoSZTz5N+2NqRXs8GBwnAwo3ZNxqhQ=="
+    }
+  },
+  "workspace": {
+    "dependencies": [
+      "jsr:@openai/openai@^4.90.0"
+    ]
+  }
+}

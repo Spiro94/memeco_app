@@ -1,11 +1,11 @@
 import 'dart:io';
-import 'package:auto_route/auto_route.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:forui/forui.dart';
 import 'package:gap/gap.dart';
-import '../../../../../../outside/theme/theme.dart';
 
+import '../../../../../../outside/theme/theme.dart';
 import '../../../../../blocs/meme_upload/bloc.dart';
 import '../../../../../blocs/meme_upload/state.dart';
 import 'image_picker.dart';
@@ -28,18 +28,7 @@ class _MemeUpload_Widget_FormState extends State<MemeUpload_Widget_Form> {
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
-    return BlocConsumer<MemeUpload_Bloc, MemeUpload_State>(
-      listenWhen: (previous, current) => previous.status != current.status,
-      listener: (context, state) {
-        switch (state.status) {
-          case MemeUpload_Status.success:
-            context.maybePop();
-          case MemeUpload_Status.failure:
-          case MemeUpload_Status.loading:
-          case MemeUpload_Status.idle:
-            break;
-        }
-      },
+    return BlocBuilder<MemeUpload_Bloc, MemeUpload_State>(
       builder: (context, state) {
         final isLoading = state.status == MemeUpload_Status.loading;
         return Form(

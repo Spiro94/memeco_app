@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -22,7 +23,7 @@ class Meme_Repository extends Repository_Base {
     return response.map(Meme.fromJson).toList();
   }
 
-  Future<void> uploadMeme({
+  Future<bool> uploadMeme({
     required String title,
     required File imageFile,
   }) async {
@@ -31,16 +32,34 @@ class Meme_Repository extends Repository_Base {
     final filePath =
         '${_getUserId()}/${DateTime.now().millisecondsSinceEpoch}_$fileName';
 
+    final result = await _supabaseClient.functions.invoke(
+      'moderate-image',
+      body: {
+        'base64Image': base64.encode(imageFile.readAsBytesSync()),
+        'mimeType': 'image/${imageFile.path.split('.').last}',
+      },
+    );
+
+    log.info('Moderation Result: ${result.data}');
+
+    final decodedData = jsonDecode(result.data as String);
+    final isSafe =
+        (decodedData as Map<String, dynamic>)['safe'] as bool? ?? false;
+
+    if (!isSafe) {
+      return false;
+    }
+
     // Upload the image to Supabase Storage.
     final response = await _supabaseClient.storage
         .from('images')
         .upload(filePath, imageFile);
 
-    log.fine('response: $response');
-
     // Retrieve the public URL for the uploaded image.
     final publicUrl =
         _supabaseClient.storage.from('images').getPublicUrl(filePath);
+
+    log.fine('response: $response');
 
     // Insert a new record into the memes table.
     final insertResponse = await _supabaseClient
@@ -48,6 +67,8 @@ class Meme_Repository extends Repository_Base {
         .insert({'title': title, 'image_url': publicUrl});
 
     log.fine('insertResponse: $insertResponse');
+
+    return true;
   }
 
   String _getUserId() {
