@@ -6,7 +6,7 @@ import '../../../../../../shared/models/meme.dart';
 import 'meme_card.dart';
 
 class MemeFeed_Widget_List extends StatelessWidget {
-  final List<Meme> memes;
+  final List<Model_Meme> memes;
   const MemeFeed_Widget_List({
     required this.memes,
     super.key,

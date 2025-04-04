@@ -12,7 +12,7 @@ class MemeFeed_Widget_Card extends StatelessWidget {
     super.key,
   });
 
-  final Meme meme;
+  final Model_Meme meme;
 
   @override
   Widget build(BuildContext context) {

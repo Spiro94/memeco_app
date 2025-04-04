@@ -23,12 +23,12 @@ final class MemeFeed_State extends Equatable {
   });
 
   final MemeFeed_Status status;
-  final List<Meme> memes;
+  final List<Model_Meme> memes;
   final String? errorMessage;
 
   MemeFeed_State copyWith({
     MemeFeed_Status? status,
-    List<Meme>? memes,
+    List<Model_Meme>? memes,
     String? errorMessage,
   }) {
     return MemeFeed_State(

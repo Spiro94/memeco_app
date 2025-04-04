@@ -40,6 +40,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	late final TranslationsEmailVerificationLinkSentEn emailVerificationLinkSent = TranslationsEmailVerificationLinkSentEn._(_root);
 	late final TranslationsForgotPasswordEn forgotPassword = TranslationsForgotPasswordEn._(_root);
 	late final TranslationsHomeEn home = TranslationsHomeEn._(_root);
+	late final TranslationsProfileEn profile = TranslationsProfileEn._(_root);
 	late final TranslationsResetPasswordLinkSentEn resetPasswordLinkSent = TranslationsResetPasswordLinkSentEn._(_root);
 	late final TranslationsResetPasswordEn resetPassword = TranslationsResetPasswordEn._(_root);
 	late final TranslationsSignInEn signIn = TranslationsSignInEn._(_root);
@@ -76,6 +77,17 @@ class TranslationsHomeEn {
 
 	// Translations
 	String get title => 'Home';
+}
+
+// Path: profile
+class TranslationsProfileEn {
+	TranslationsProfileEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'Profile';
+	late final TranslationsProfileActionsEn actions = TranslationsProfileActionsEn._(_root);
 }
 
 // Path: resetPasswordLinkSent
@@ -135,6 +147,18 @@ class TranslationsForgotPasswordFormEn {
 	// Translations
 	late final TranslationsForgotPasswordFormEmailEn email = TranslationsForgotPasswordFormEmailEn._(_root);
 	late final TranslationsForgotPasswordFormSubmitEn submit = TranslationsForgotPasswordFormSubmitEn._(_root);
+}
+
+// Path: profile.actions
+class TranslationsProfileActionsEn {
+	TranslationsProfileActionsEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	late final TranslationsProfileActionsSignOutEn signOut = TranslationsProfileActionsSignOutEn._(_root);
+	late final TranslationsProfileActionsEditProfileEn editProfile = TranslationsProfileActionsEditProfileEn._(_root);
+	late final TranslationsProfileActionsDeleteAccountEn deleteAccount = TranslationsProfileActionsDeleteAccountEn._(_root);
 }
 
 // Path: resetPasswordLinkSent.resend
@@ -238,6 +262,37 @@ class TranslationsForgotPasswordFormSubmitEn {
 
 	// Translations
 	String get label => 'Reset Password';
+}
+
+// Path: profile.actions.signOut
+class TranslationsProfileActionsSignOutEn {
+	TranslationsProfileActionsSignOutEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get label => 'Sign Out';
+}
+
+// Path: profile.actions.editProfile
+class TranslationsProfileActionsEditProfileEn {
+	TranslationsProfileActionsEditProfileEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get label => 'Edit Profile';
+}
+
+// Path: profile.actions.deleteAccount
+class TranslationsProfileActionsDeleteAccountEn {
+	TranslationsProfileActionsDeleteAccountEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get label => 'Delete Account';
+	late final TranslationsProfileActionsDeleteAccountDialogEn dialog = TranslationsProfileActionsDeleteAccountDialogEn._(_root);
 }
 
 // Path: resetPassword.form.password
@@ -363,6 +418,18 @@ class TranslationsForgotPasswordFormEmailErrorEn {
 	String get invalid => 'Please enter a valid email address.';
 }
 
+// Path: profile.actions.deleteAccount.dialog
+class TranslationsProfileActionsDeleteAccountDialogEn {
+	TranslationsProfileActionsDeleteAccountDialogEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'Delete Account';
+	String get cancel => 'Cancel';
+	late final TranslationsProfileActionsDeleteAccountDialogSubmitEn submit = TranslationsProfileActionsDeleteAccountDialogSubmitEn._(_root);
+}
+
 // Path: resetPassword.form.password.error
 class TranslationsResetPasswordFormPasswordErrorEn {
 	TranslationsResetPasswordFormPasswordErrorEn._(this._root);
@@ -439,6 +506,17 @@ class TranslationsSignUpResendEmailVerificationDialogSubmitEn {
 	String get success => 'Your email verification link was resent.';
 }
 
+// Path: profile.actions.deleteAccount.dialog.submit
+class TranslationsProfileActionsDeleteAccountDialogSubmitEn {
+	TranslationsProfileActionsDeleteAccountDialogSubmitEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get label => 'Delete Account';
+	String get success => 'Your account was deleted.';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 extension on Translations {
@@ -453,6 +531,14 @@ extension on Translations {
 			case 'forgotPassword.form.email.error.invalid': return 'Please enter a valid email address.';
 			case 'forgotPassword.form.submit.label': return 'Reset Password';
 			case 'home.title': return 'Home';
+			case 'profile.title': return 'Profile';
+			case 'profile.actions.signOut.label': return 'Sign Out';
+			case 'profile.actions.editProfile.label': return 'Edit Profile';
+			case 'profile.actions.deleteAccount.label': return 'Delete Account';
+			case 'profile.actions.deleteAccount.dialog.title': return 'Delete Account';
+			case 'profile.actions.deleteAccount.dialog.cancel': return 'Cancel';
+			case 'profile.actions.deleteAccount.dialog.submit.label': return 'Delete Account';
+			case 'profile.actions.deleteAccount.dialog.submit.success': return 'Your account was deleted.';
 			case 'resetPasswordLinkSent.title': return 'Reset Password Link';
 			case 'resetPasswordLinkSent.subtitle': return 'Check your email for your reset password link.';
 			case 'resetPasswordLinkSent.resend.question': return 'Didn\'t receive a link?';

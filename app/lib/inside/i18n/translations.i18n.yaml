@@ -17,6 +17,22 @@ forgotPassword:
 home:
   title: "Home"
 
+profile:
+  title: "Profile"
+  actions:
+    signOut:
+      label: "Sign Out"
+    editProfile:
+      label: "Edit Profile"
+    deleteAccount:
+      label: "Delete Account"
+      dialog:
+        title: "Delete Account"
+        cancel: "Cancel"
+        submit:
+          label: "Delete Account"
+          success: "Your account was deleted."
+
 resetPasswordLinkSent:
   title: "Reset Password Link"
   subtitle: "Check your email for your reset password link."

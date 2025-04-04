@@ -11,7 +11,7 @@ MemeFeed_State _$MemeFeed_StateFromJson(Map<String, dynamic> json) =>
       status: $enumDecodeNullable(_$MemeFeed_StatusEnumMap, json['status']) ??
           MemeFeed_Status.idle,
       memes: (json['memes'] as List<dynamic>?)
-              ?.map((e) => Meme.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => Model_Meme.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       errorMessage: json['errorMessage'] as String?,

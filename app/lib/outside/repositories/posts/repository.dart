@@ -14,13 +14,13 @@ class Meme_Repository extends Repository_Base {
   @override
   Future<void> init() async {}
 
-  Future<List<Meme>> fetchMemes() async {
+  Future<List<Model_Meme>> fetchMemes() async {
     final response = await _supabaseClient
         .from('memes')
         .select()
         .order('created_at', ascending: false);
 
-    return response.map(Meme.fromJson).toList();
+    return response.map(Model_Meme.fromJson).toList();
   }
 
   Future<bool> uploadMeme({
