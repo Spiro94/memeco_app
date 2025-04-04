@@ -17,7 +17,8 @@ import '../outside/effect_providers/auth_change/effect_provider.dart';
 import '../outside/effect_providers/mixpanel/effect_provider.dart';
 import '../outside/repositories/all.dart';
 import '../outside/repositories/auth/repository.dart';
-import '../outside/repositories/posts/repository.dart';
+import '../outside/repositories/memes/repository.dart';
+import '../outside/repositories/profile/repository.dart';
 import 'builder.dart';
 import 'configurations/configuration.dart';
 
@@ -79,6 +80,9 @@ Future<void> appRunner({
       supabaseClient: clientProviders.supabaseClientProvider.client,
     ),
     memeRepository: Meme_Repository(
+      supabaseClient: clientProviders.supabaseClientProvider.client,
+    ),
+    profileRepository: Profile_Repository(
       supabaseClient: clientProviders.supabaseClientProvider.client,
     ),
   );

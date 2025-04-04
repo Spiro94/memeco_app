@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 
 import '../../../../../outside/theme/theme.dart';
 import '../../../../../shared/mixins/logging.dart';
@@ -79,15 +80,15 @@ class _SignIn_Form_SignInState extends State<SignIn_Form_SignIn> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          SizedBox(height: context.tokens.spacing.medium),
+          Gap(context.tokens.spacing.medium),
           SignIn_Input_Email(controller: emailController),
-          SizedBox(height: context.tokens.spacing.medium),
+          Gap(context.tokens.spacing.medium),
           SignIn_Input_Password(controller: passwordController),
-          SizedBox(height: context.tokens.spacing.medium),
+          Gap(context.tokens.spacing.medium),
           const SignIn_Link_ForgotPassword(),
-          SizedBox(height: context.tokens.spacing.medium),
+          Gap(context.tokens.spacing.medium),
           SignIn_Button_Submit(onSubmit: _onSubmit),
-          SizedBox(height: context.tokens.spacing.medium),
+          Gap(context.tokens.spacing.medium),
         ],
       ),
     );

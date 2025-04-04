@@ -1,18 +1,17 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../outside/repositories/posts/repository.dart';
+import '../../../outside/repositories/memes/repository.dart';
+import '../../../shared/mixins/logging.dart';
 import 'events.dart';
 import 'state.dart';
 
-class MemeFeed_Bloc extends Bloc<MemeFeed_Event, MemeFeed_State> {
+class MemeFeed_Bloc extends Bloc<MemeFeed_Event, MemeFeed_State>
+    with SharedMixin_Logging {
   MemeFeed_Bloc({
     required Meme_Repository memeRepository,
+    required MemeFeed_State initialState,
   })  : _memeRepository = memeRepository,
-        super(
-          const MemeFeed_State(
-            status: MemeFeed_Status.idle,
-          ),
-        ) {
+        super(initialState) {
     on<MemeFeed_Event_FetchMemes>(_onLoad);
   }
 
@@ -31,7 +30,8 @@ class MemeFeed_Bloc extends Bloc<MemeFeed_Event, MemeFeed_State> {
           status: MemeFeed_Status.loaded,
         ),
       );
-    } catch (e) {
+    } catch (e, stackTrace) {
+      log.warning('${event.runtimeType}: error', e, stackTrace);
       emit(
         state.copyWith(
           status: MemeFeed_Status.loadError,

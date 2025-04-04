@@ -2,9 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:forui/forui.dart';
+import 'package:gap/gap.dart';
 
+import '../../../../../outside/theme/theme.dart';
 import '../../../../blocs/auth/bloc.dart';
 import '../../../../blocs/auth/events.dart';
+import '../../../../blocs/profile/bloc.dart';
 import '../../../../i18n/translations.g.dart';
 
 @RoutePage()
@@ -33,6 +36,7 @@ class _Profile_PageState extends State<Profile_Page>
 
   @override
   Widget build(BuildContext context) {
+    final profile = context.watch<Profile_Bloc>().state.profile;
     return FScaffold(
       header: FHeader(
         title: Text(context.t.profile.title),
@@ -70,8 +74,24 @@ class _Profile_PageState extends State<Profile_Page>
           ),
         ],
       ),
-      content: const Center(
-        child: Text('Profile Page'),
+      content: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            FAvatar(
+              image: const NetworkImage(''),
+              fallback: Text(
+                profile?.username[0].toUpperCase() ?? '',
+                style: const TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              size: 80,
+            ),
+            Gap(context.tokens.spacing.medium),
+          ],
+        ),
       ),
     );
   }

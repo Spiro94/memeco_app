@@ -1,15 +1,20 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../outside/repositories/posts/repository.dart';
+import '../../../outside/repositories/memes/repository.dart';
+import '../../../shared/mixins/logging.dart';
 import 'events.dart';
 import 'state.dart';
 
-class MemeUpload_Bloc extends Bloc<MemeUpload_Event, MemeUpload_State> {
-  final Meme_Repository memeRepository;
-
-  MemeUpload_Bloc({required this.memeRepository})
-      : super(const MemeUpload_State()) {
+class MemeUpload_Bloc extends Bloc<MemeUpload_Event, MemeUpload_State>
+    with SharedMixin_Logging {
+  MemeUpload_Bloc({
+    required Meme_Repository memeRepository,
+    required MemeUpload_State initialState,
+  })  : _memeRepository = memeRepository,
+        super(initialState) {
     on<MemeUpload_Event_SubmitMeme>(_onSubmitMeme);
   }
+
+  final Meme_Repository _memeRepository;
 
   Future<void> _onSubmitMeme(
     MemeUpload_Event_SubmitMeme event,
@@ -17,7 +22,7 @@ class MemeUpload_Bloc extends Bloc<MemeUpload_Event, MemeUpload_State> {
   ) async {
     emit(state.copyWith(status: MemeUpload_Status.loading));
     try {
-      final result = await memeRepository.uploadMeme(
+      final result = await _memeRepository.uploadMeme(
         title: event.title,
         imageFile: event.imageFile,
       );
@@ -31,11 +36,12 @@ class MemeUpload_Bloc extends Bloc<MemeUpload_Event, MemeUpload_State> {
           ),
         );
       }
-    } catch (error) {
+    } catch (e, stackTrace) {
+      log.warning('${event.runtimeType}: error', e, stackTrace);
       emit(
         state.copyWith(
           status: MemeUpload_Status.failure,
-          errorMessage: error.toString(),
+          errorMessage: e.toString(),
         ),
       );
     } finally {

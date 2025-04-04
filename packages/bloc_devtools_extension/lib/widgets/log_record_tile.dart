@@ -3,7 +3,8 @@ import '../models/log_record.dart';
 
 class LogRecordTile extends StatelessWidget {
   const LogRecordTile({
-    required this.log, super.key,
+    required this.log,
+    super.key,
   });
 
   final BDELogRecord log;

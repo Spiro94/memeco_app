@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
+import 'package:gap/gap.dart';
 
 import '../../../../../outside/theme/theme.dart';
 import '../../../../util/breakpoints.dart';
@@ -36,11 +37,11 @@ class ResetPasswordLinkSent_Page extends StatelessWidget
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SizedBox(height: context.tokens.spacing.medium),
+                Gap(context.tokens.spacing.medium),
                 const ResetPasswordLinkSent_Text_Subtitle(),
                 const FDivider(),
                 const ResetPasswordLinkSent_Link_Resend(),
-                SizedBox(height: context.tokens.spacing.medium),
+                Gap(context.tokens.spacing.medium),
               ],
             ),
           ),

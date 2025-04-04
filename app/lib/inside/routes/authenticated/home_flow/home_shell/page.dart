@@ -3,11 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:forui/forui.dart';
 
-import '../../../../../outside/repositories/posts/repository.dart';
+import '../../../../../outside/repositories/memes/repository.dart';
+import '../../../../../outside/repositories/profile/repository.dart';
 import '../../../../blocs/meme_upload/bloc.dart';
 import '../../../../blocs/meme_upload/events.dart';
+import '../../../../blocs/meme_upload/state.dart';
 import '../../../../blocs/memes/bloc.dart';
 import '../../../../blocs/memes/events.dart';
+import '../../../../blocs/memes/state.dart';
+import '../../../../blocs/profile/bloc.dart';
+import '../../../../blocs/profile/events.dart';
+import '../../../../blocs/profile/state.dart';
 import '../../../router.dart';
 import '../upload/widgets/form.dart';
 import 'widgets/upload_listener_status_change.dart';
@@ -21,14 +27,25 @@ class HomeShell_Page extends StatelessWidget implements AutoRouteWrapper {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
+          lazy: false,
           create: (_) => MemeFeed_Bloc(
             memeRepository: context.read<Meme_Repository>(),
+            initialState: const MemeFeed_State(),
           )..add(const MemeFeed_Event_FetchMemes()),
         ),
         BlocProvider(
+          lazy: false,
           create: (_) => MemeUpload_Bloc(
             memeRepository: context.read<Meme_Repository>(),
+            initialState: const MemeUpload_State(),
           ),
+        ),
+        BlocProvider(
+          lazy: false,
+          create: (context) => Profile_Bloc(
+            profileRepository: context.read<Profile_Repository>(),
+            initialState: Profile_State(),
+          )..add(const ProfileEvent_Load()),
         ),
       ],
       child: this,

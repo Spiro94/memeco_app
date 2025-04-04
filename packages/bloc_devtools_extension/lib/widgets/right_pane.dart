@@ -19,7 +19,8 @@ class RightPane extends StatelessWidget {
           children: [
             Expanded(
               child: StepThroughEvents(
-                  onSetSelectedEventIndex: onSetSelectedEventIndex,),
+                onSetSelectedEventIndex: onSetSelectedEventIndex,
+              ),
             ),
             const Expanded(
               child: Align(

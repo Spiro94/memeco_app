@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:forui/forui.dart';
+import 'package:gap/gap.dart';
 
 import '../../../../outside/repositories/auth/repository.dart';
 import '../../../../outside/theme/theme.dart';
@@ -41,7 +42,7 @@ class SignUp_Page extends StatelessWidget implements AutoRouteWrapper {
                 const SignUp_Form_SignUp(),
                 const FDivider(),
                 const SignUp_Link_ResendEmailVerification(),
-                SizedBox(height: context.tokens.spacing.medium),
+                Gap(context.tokens.spacing.medium),
               ],
             ),
           ),

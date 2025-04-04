@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 
 import '../../../../../outside/theme/theme.dart';
 import '../../../../../shared/mixins/logging.dart';
@@ -74,11 +75,11 @@ class _ResetPassword_Form_ResetPasswordState
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          SizedBox(height: context.tokens.spacing.medium),
+          Gap(context.tokens.spacing.medium),
           ResetPassword_Input_Password(controller: passwordController),
-          SizedBox(height: context.tokens.spacing.medium),
+          Gap(context.tokens.spacing.medium),
           ResetPassword_Button_Submit(onSubmit: _onSubmit),
-          SizedBox(height: context.tokens.spacing.medium),
+          Gap(context.tokens.spacing.medium),
         ],
       ),
     );

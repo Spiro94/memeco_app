@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
+import 'package:gap/gap.dart';
 
 import '../../../../../outside/theme/theme.dart';
 import '../../../../util/breakpoints.dart';
@@ -30,7 +31,7 @@ class ForgotPassword_Page extends StatelessWidget implements AutoRouteWrapper {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const ForgotPassword_Form_ResetPasswordRequest(),
-                SizedBox(height: context.tokens.spacing.medium),
+                Gap(context.tokens.spacing.medium),
               ],
             ),
           ),

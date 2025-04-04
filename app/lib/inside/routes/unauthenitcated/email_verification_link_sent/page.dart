@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:forui/forui.dart';
+import 'package:gap/gap.dart';
 
 import '../../../../outside/repositories/auth/repository.dart';
 import '../../../../outside/theme/theme.dart';
@@ -36,9 +37,9 @@ class EmailVerificationLinkSent_Page extends StatelessWidget
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(height: context.tokens.spacing.medium),
+              Gap(context.tokens.spacing.medium),
               const EmailVerificationLinkSent_Text_Subtitle(),
-              SizedBox(height: context.tokens.spacing.medium),
+              Gap(context.tokens.spacing.medium),
             ],
           ),
         ),

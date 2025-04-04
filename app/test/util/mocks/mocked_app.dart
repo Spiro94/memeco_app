@@ -58,6 +58,7 @@ class MocksContainer {
   final repositories = Repositories_All(
     authRepository: MockAuthRepository(),
     memeRepository: MockMemeRepository(),
+    profileRepository: MockProfileRepository(),
   );
 
   final effectProviders = EffectProviders_All(
