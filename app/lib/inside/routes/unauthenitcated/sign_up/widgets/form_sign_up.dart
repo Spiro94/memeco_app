@@ -8,6 +8,7 @@ import '../../../../blocs/sign_up/events.dart';
 import 'button_submit.dart';
 import 'input_email.dart';
 import 'input_password.dart';
+import 'input_username.dart';
 
 class SignUp_Form_SignUp extends StatefulWidget with SharedMixin_Logging {
   const SignUp_Form_SignUp({super.key});
@@ -22,6 +23,7 @@ class _SignUp_Form_SignUpState extends State<SignUp_Form_SignUp> {
 
   late final TextEditingController emailController;
   late final TextEditingController passwordController;
+  late final TextEditingController usernameController;
 
   void _refresh() {
     setState(() {});
@@ -33,15 +35,18 @@ class _SignUp_Form_SignUpState extends State<SignUp_Form_SignUp> {
 
     emailController = TextEditingController();
     passwordController = TextEditingController();
+    usernameController = TextEditingController();
 
     emailController.addListener(_refresh);
     passwordController.addListener(_refresh);
+    usernameController.addListener(_refresh);
   }
 
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
+    usernameController.dispose();
     super.dispose();
   }
 
@@ -63,6 +68,7 @@ class _SignUp_Form_SignUpState extends State<SignUp_Form_SignUp> {
           SignUp_Event_SignUp(
             email: emailController.text,
             password: passwordController.text,
+            username: usernameController.text,
           ),
         );
   }
@@ -78,6 +84,8 @@ class _SignUp_Form_SignUpState extends State<SignUp_Form_SignUp> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          SizedBox(height: context.tokens.spacing.medium),
+          SignUp_Input_Username(controller: usernameController),
           SizedBox(height: context.tokens.spacing.medium),
           SignUp_Input_Email(controller: emailController),
           SizedBox(height: context.tokens.spacing.medium),

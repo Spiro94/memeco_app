@@ -70,7 +70,7 @@ class _MemeUpload_Widget_FormState extends State<MemeUpload_Widget_Form> {
                       ),
                     ),
                   ),
-                Gap(context.tokens.spacing.medium),
+                Gap(context.tokens.spacing.xxLarge),
                 Column(
                   children: [
                     FButton(

@@ -61,15 +61,20 @@ class Auth_Repository extends Repository_Base {
   Future<void> signUp({
     required String email,
     required String password,
+    required String username,
   }) async {
     log.info('signUp');
     log.fine('email: $email');
+    log.fine('username: $username');
     log.fine('redirectTo: $_signUpRedirectUrl');
 
     await _supabaseClient.auth.signUp(
       email: email,
       emailRedirectTo: _signUpRedirectUrl,
       password: password,
+      data: {
+        'username': username,
+      },
     );
   }
 

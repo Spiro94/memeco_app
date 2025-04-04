@@ -6,6 +6,8 @@ import '../blocs/auth/bloc.dart';
 import 'authenticated/guard.dart';
 import 'authenticated/home_flow/feed/page.dart';
 import 'authenticated/home_flow/home_shell/page.dart';
+import 'authenticated/home_flow/profile/page.dart';
+import 'authenticated/home_flow/upload/page.dart';
 import 'authenticated/reset_password/page.dart';
 import 'authenticated/router.dart';
 import 'unauthenitcated/email_verification_link_sent/page.dart';
@@ -83,8 +85,8 @@ class Routes_router extends RootStackRouter with SharedMixin_Logging {
               page: HomeShell_Route.page,
               children: [
                 AutoRoute(path: 'feed', page: HomeFeed_Route.page),
-
-                // AutoRoute(path: 'profile', page: ProfileRoute.page),
+                AutoRoute(path: 'upload', page: UploadMeme_Route.page),
+                AutoRoute(path: 'profile', page: Profile_Route.page),
               ],
             ),
             AutoRoute(

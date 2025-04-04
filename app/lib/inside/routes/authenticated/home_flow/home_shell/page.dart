@@ -39,10 +39,11 @@ class HomeShell_Page extends StatelessWidget implements AutoRouteWrapper {
   Widget build(BuildContext context) {
     return MemeUpload_Listener_StatusChange(
       child: AutoTabsRouter.pageView(
+        homeIndex: 0,
         routes: const [
           HomeFeed_Route(),
-          // MemeUpload_Route(),
-          // ProfileRoute(),
+          UploadMeme_Route(),
+          Profile_Route(),
         ],
         builder: (context, child, controller) {
           final tabsRouter = AutoTabsRouter.of(context);
@@ -99,18 +100,38 @@ class HomeShell_Page extends StatelessWidget implements AutoRouteWrapper {
                     tabsRouter.setActiveIndex(value);
                   }
                 },
-                children: const [
+                children: [
                   FBottomNavigationBarItem(
-                    icon: Icon(Icons.home),
-                    label: Text('Home'),
+                    icon: FIcon(FAssets.icons.house),
+                    label: const Text('Inicio'),
                   ),
                   FBottomNavigationBarItem(
-                    icon: Icon(Icons.upload),
-                    label: Text('Upload'),
+                    icon: CircleAvatar(
+                      backgroundColor: context.theme.colorScheme.primary,
+                      radius: 35,
+                      child: FIcon(
+                        FAssets.icons.plus,
+                        color: context.theme.colorScheme.primaryForeground,
+                      ),
+                    ),
+                    label: const SizedBox.shrink(),
+                    style: FBottomNavigationBarItemStyle(
+                      iconSize: 40,
+                      activeIconColor: Colors.black,
+                      activeTextStyle: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      inactiveIconColor: Colors.black,
+                      inactiveTextStyle: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
                   FBottomNavigationBarItem(
-                    icon: Icon(Icons.settings),
-                    label: Text('Settings'),
+                    icon: FIcon(FAssets.icons.user),
+                    label: const Text('Perfil'),
                   ),
                 ],
               ),

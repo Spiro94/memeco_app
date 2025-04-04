@@ -200,6 +200,7 @@ class TranslationsSignUpFormEn {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
+	late final TranslationsSignUpFormUsernameEn username = TranslationsSignUpFormUsernameEn._(_root);
 	late final TranslationsSignUpFormEmailEn email = TranslationsSignUpFormEmailEn._(_root);
 	late final TranslationsSignUpFormPasswordEn password = TranslationsSignUpFormPasswordEn._(_root);
 	late final TranslationsSignUpFormSubmitEn submit = TranslationsSignUpFormSubmitEn._(_root);
@@ -294,6 +295,18 @@ class TranslationsSignInFormSubmitEn {
 	String get label => 'Sign In';
 }
 
+// Path: signUp.form.username
+class TranslationsSignUpFormUsernameEn {
+	TranslationsSignUpFormUsernameEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get label => 'Username';
+	String get hint => 'john.doe';
+	late final TranslationsSignUpFormUsernameErrorEn error = TranslationsSignUpFormUsernameErrorEn._(_root);
+}
+
 // Path: signUp.form.email
 class TranslationsSignUpFormEmailEn {
 	TranslationsSignUpFormEmailEn._(this._root);
@@ -382,6 +395,17 @@ class TranslationsSignInFormPasswordErrorEn {
 	String get empty => 'Please enter a password.';
 }
 
+// Path: signUp.form.username.error
+class TranslationsSignUpFormUsernameErrorEn {
+	TranslationsSignUpFormUsernameErrorEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get empty => 'Please enter your username.';
+	String get invalid => 'Please enter a valid username.';
+}
+
 // Path: signUp.form.email.error
 class TranslationsSignUpFormEmailErrorEn {
 	TranslationsSignUpFormEmailErrorEn._(this._root);
@@ -452,6 +476,10 @@ extension on Translations {
 			case 'signIn.form.password.error.empty': return 'Please enter a password.';
 			case 'signIn.form.submit.label': return 'Sign In';
 			case 'signUp.title': return 'Sign Up';
+			case 'signUp.form.username.label': return 'Username';
+			case 'signUp.form.username.hint': return 'john.doe';
+			case 'signUp.form.username.error.empty': return 'Please enter your username.';
+			case 'signUp.form.username.error.invalid': return 'Please enter a valid username.';
 			case 'signUp.form.email.label': return 'Email';
 			case 'signUp.form.email.hint': return 'john.doe@example.com';
 			case 'signUp.form.email.error.empty': return 'Please enter your email address.';

@@ -107,6 +107,22 @@ class HomeShell_Route extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [Profile_Page]
+class Profile_Route extends PageRouteInfo<void> {
+  const Profile_Route({List<PageRouteInfo>? children})
+    : super(Profile_Route.name, initialChildren: children);
+
+  static const String name = 'Profile_Route';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const Profile_Page();
+    },
+  );
+}
+
+/// generated route for
 /// [ResetPasswordLinkSent_Page]
 class ResetPasswordLinkSent_Route
     extends PageRouteInfo<ResetPasswordLinkSent_RouteArgs> {
@@ -213,6 +229,22 @@ class Unauthenticated_Routes extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const Unauthenticated_Router();
+    },
+  );
+}
+
+/// generated route for
+/// [UploadMeme_Page]
+class UploadMeme_Route extends PageRouteInfo<void> {
+  const UploadMeme_Route({List<PageRouteInfo>? children})
+    : super(UploadMeme_Route.name, initialChildren: children);
+
+  static const String name = 'UploadMeme_Route';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const UploadMeme_Page();
     },
   );
 }

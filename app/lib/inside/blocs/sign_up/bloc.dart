@@ -37,7 +37,9 @@ class SignUp_Bloc extends Bloc_Base<SignUp_Event, SignUp_State> {
       await _authRepository.signUp(
         email: event.email.trim(),
         password: event.password.trim(),
+        username: event.username.trim(),
       );
+
       emit(state.copyWith(status: SignUp_Status.signUpSuccess));
     } catch (e, stackTrace) {
       log.warning('${event.runtimeType}: error', e, stackTrace);

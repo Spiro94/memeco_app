@@ -24,4 +24,5 @@ const _$MemeUpload_StatusEnumMap = {
   MemeUpload_Status.loading: 'loading',
   MemeUpload_Status.success: 'success',
   MemeUpload_Status.failure: 'failure',
+  MemeUpload_Status.imageNotSafe: 'imageNotSafe',
 };
