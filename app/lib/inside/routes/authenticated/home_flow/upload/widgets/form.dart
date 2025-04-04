@@ -52,6 +52,7 @@ class _MemeUpload_Widget_FormState extends State<MemeUpload_Widget_Form> {
                   label: const Text('Meme Title'),
                   validator: (value) =>
                       (value == null || value.isEmpty) ? 'Enter a title' : null,
+                  maxLines: 1,
                 ),
                 Gap(context.tokens.spacing.medium),
                 MemeUpload_Widget_ImagePicker(

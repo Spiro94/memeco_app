@@ -39,6 +39,7 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	// Translations
 	late final TranslationsEmailVerificationLinkSentEn emailVerificationLinkSent = TranslationsEmailVerificationLinkSentEn._(_root);
 	late final TranslationsForgotPasswordEn forgotPassword = TranslationsForgotPasswordEn._(_root);
+	late final TranslationsHomeShellEn homeShell = TranslationsHomeShellEn._(_root);
 	late final TranslationsHomeEn home = TranslationsHomeEn._(_root);
 	late final TranslationsProfileEn profile = TranslationsProfileEn._(_root);
 	late final TranslationsResetPasswordLinkSentEn resetPasswordLinkSent = TranslationsResetPasswordLinkSentEn._(_root);
@@ -67,6 +68,16 @@ class TranslationsForgotPasswordEn {
 	// Translations
 	String get title => 'Forgot Password?';
 	late final TranslationsForgotPasswordFormEn form = TranslationsForgotPasswordFormEn._(_root);
+}
+
+// Path: homeShell
+class TranslationsHomeShellEn {
+	TranslationsHomeShellEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	late final TranslationsHomeShellNavigationBarEn navigationBar = TranslationsHomeShellNavigationBarEn._(_root);
 }
 
 // Path: home
@@ -147,6 +158,17 @@ class TranslationsForgotPasswordFormEn {
 	// Translations
 	late final TranslationsForgotPasswordFormEmailEn email = TranslationsForgotPasswordFormEmailEn._(_root);
 	late final TranslationsForgotPasswordFormSubmitEn submit = TranslationsForgotPasswordFormSubmitEn._(_root);
+}
+
+// Path: homeShell.navigationBar
+class TranslationsHomeShellNavigationBarEn {
+	TranslationsHomeShellNavigationBarEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	late final TranslationsHomeShellNavigationBarHomeEn home = TranslationsHomeShellNavigationBarHomeEn._(_root);
+	late final TranslationsHomeShellNavigationBarProfileEn profile = TranslationsHomeShellNavigationBarProfileEn._(_root);
 }
 
 // Path: profile.actions
@@ -262,6 +284,26 @@ class TranslationsForgotPasswordFormSubmitEn {
 
 	// Translations
 	String get label => 'Reset Password';
+}
+
+// Path: homeShell.navigationBar.home
+class TranslationsHomeShellNavigationBarHomeEn {
+	TranslationsHomeShellNavigationBarHomeEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get label => 'Home';
+}
+
+// Path: homeShell.navigationBar.profile
+class TranslationsHomeShellNavigationBarProfileEn {
+	TranslationsHomeShellNavigationBarProfileEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get label => 'Profile';
 }
 
 // Path: profile.actions.signOut
@@ -530,6 +572,8 @@ extension on Translations {
 			case 'forgotPassword.form.email.error.empty': return 'Please enter your email address.';
 			case 'forgotPassword.form.email.error.invalid': return 'Please enter a valid email address.';
 			case 'forgotPassword.form.submit.label': return 'Reset Password';
+			case 'homeShell.navigationBar.home.label': return 'Home';
+			case 'homeShell.navigationBar.profile.label': return 'Profile';
 			case 'home.title': return 'Home';
 			case 'profile.title': return 'Profile';
 			case 'profile.actions.signOut.label': return 'Sign Out';

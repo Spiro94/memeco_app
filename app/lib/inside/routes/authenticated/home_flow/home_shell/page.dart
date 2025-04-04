@@ -14,6 +14,7 @@ import '../../../../blocs/memes/state.dart';
 import '../../../../blocs/profile/bloc.dart';
 import '../../../../blocs/profile/events.dart';
 import '../../../../blocs/profile/state.dart';
+import '../../../../i18n/translations.g.dart';
 import '../../../router.dart';
 import '../upload/widgets/form.dart';
 import 'widgets/upload_listener_status_change.dart';
@@ -120,7 +121,7 @@ class HomeShell_Page extends StatelessWidget implements AutoRouteWrapper {
                 children: [
                   FBottomNavigationBarItem(
                     icon: FIcon(FAssets.icons.house),
-                    label: const Text('Inicio'),
+                    label: Text(context.t.homeShell.navigationBar.home.label),
                   ),
                   FBottomNavigationBarItem(
                     icon: CircleAvatar(
@@ -148,7 +149,8 @@ class HomeShell_Page extends StatelessWidget implements AutoRouteWrapper {
                   ),
                   FBottomNavigationBarItem(
                     icon: FIcon(FAssets.icons.user),
-                    label: const Text('Perfil'),
+                    label:
+                        Text(context.t.homeShell.navigationBar.profile.label),
                   ),
                 ],
               ),

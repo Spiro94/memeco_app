@@ -76,7 +76,7 @@ class _Profile_PageState extends State<Profile_Page>
       ),
       content: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             FAvatar(
               image: const NetworkImage(''),
@@ -90,6 +90,13 @@ class _Profile_PageState extends State<Profile_Page>
               size: 80,
             ),
             Gap(context.tokens.spacing.medium),
+            Text(
+              profile?.username ?? '',
+              style: const TextStyle(
+                fontSize: 26,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ],
         ),
       ),
