@@ -97,6 +97,7 @@ void main() {
               password: any(
                 named: 'password',
               ),
+              username: any(named: 'username'),
             ),
           ).thenAnswer((_) async {});
         },
@@ -171,6 +172,7 @@ void main() {
                 password: any(
                   named: 'password',
                 ),
+                username: any(named: 'username'),
               ),
             ).thenAnswer((_) async {});
           },
@@ -411,6 +413,7 @@ void main() {
                 password: any(
                   named: 'password',
                 ),
+                username: any(named: 'username'),
               ),
             ).thenThrow(Exception('BOOM'));
           },
