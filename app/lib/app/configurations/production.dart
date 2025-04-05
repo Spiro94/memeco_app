@@ -15,9 +15,8 @@ void main() {
     appLocale: AppLocale.en,
     logLevel: logging.Level.INFO,
     theme: OutsideThemes.lightTheme,
-    deepLinkBaseUri: kIsWeb
-        ? 'CHANGE_ME'
-        : 'com.gadfly361.gadflyfluttertemplate.deep://deeplink-callback',
+    deepLinkBaseUri:
+        kIsWeb ? 'CHANGE_ME' : 'com.scarkov.memeco.deep://deeplink-callback',
     clientProvidersConfigurations: ClientProvidersConfigurations(
       sentry: null, // Using Crashlytics instead
       supabase: const Supabase_ClientProvider_Configuration(

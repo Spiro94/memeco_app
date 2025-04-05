@@ -21,7 +21,7 @@ void main() {
     theme: OutsideThemes.lightTheme,
     deepLinkBaseUri: kIsWeb
         ? 'http://$siteHost:3000'
-        : 'daniel.villamizar.memeco.deep://deeplink-callback',
+        : 'com.scarkov.memeco.deep://deeplink-callback',
     clientProvidersConfigurations: ClientProvidersConfigurations(
       sentry: null,
       supabase: const Supabase_ClientProvider_Configuration(

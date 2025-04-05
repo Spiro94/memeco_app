@@ -1,7 +1,6 @@
 // coverage:ignore-file
 
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logging/logging.dart';
@@ -10,6 +9,7 @@ import 'package:uuid/uuid.dart';
 
 import '../inside/blocs/observer.dart';
 import '../outside/client_providers/all.dart';
+import '../outside/client_providers/firebase_crashalytics/client_provider.dart';
 import '../outside/client_providers/sentry/client_provider.dart';
 import '../outside/client_providers/supabase/client_provider.dart';
 import '../outside/effect_providers/all.dart';
@@ -38,12 +38,6 @@ Future<void> appRunner({
 
   await Firebase.initializeApp();
 
-  // If flutter error, log severe
-  FlutterError.onError = (details) {
-    log.severe(details.exceptionAsString(), details.exception, details.stack);
-    FirebaseCrashlytics.instance.recordFlutterFatalError(details);
-  };
-
   // Create initial sessionId
   final initialSessionId = const Uuid().v4();
 
@@ -56,8 +50,17 @@ Future<void> appRunner({
     supabaseClientProvider: Supabase_ClientProvider(
       configuration: configuration.clientProvidersConfigurations.supabase,
     ),
+    crashalyticsClientProvider: Crashalytics_ClientProvider(
+      initialSessionId: initialSessionId,
+    ),
   );
   await clientProviders.initialize();
+
+  // If flutter error, log severe
+  FlutterError.onError = (details) {
+    log.severe(details.exceptionAsString(), details.exception, details.stack);
+    clientProviders.crashalyticsClientProvider.recordFlutterFatalError(details);
+  };
 
   // Create and initialize effect providers
   final effectProviders = EffectProviders_All(
@@ -77,6 +80,7 @@ Future<void> appRunner({
       deepLinkBaseUri: configuration.deepLinkBaseUri,
       mixpanelEffectProvider: effectProviders.mixpanelEffectProvider,
       sentryClientProvider: clientProviders.sentryClientProvider,
+      crashalyticsClientProvider: clientProviders.crashalyticsClientProvider,
       supabaseClient: clientProviders.supabaseClientProvider.client,
     ),
     memeRepository: Meme_Repository(

@@ -1,4 +1,4 @@
-package daniel.villamizar.memeco
+package com.scarkov.memeco
 
 import io.flutter.embedding.android.FlutterActivity
 

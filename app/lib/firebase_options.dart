@@ -70,8 +70,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '596013733093',
     projectId: 'memeco-d3897',
     storageBucket: 'memeco-d3897.appspot.com',
-    androidClientId: '596013733093-08nn814klrjblrpdb6ofrcsh5tfvoul1.apps.googleusercontent.com',
-    iosClientId: '596013733093-7ntfd1jeq2jh8bpe3ad1j3q72rvrj90d.apps.googleusercontent.com',
-    iosBundleId: 'daniel.villamizar.memeco',
+    androidClientId:
+        '596013733093-08nn814klrjblrpdb6ofrcsh5tfvoul1.apps.googleusercontent.com',
+    iosClientId:
+        '596013733093-7ntfd1jeq2jh8bpe3ad1j3q72rvrj90d.apps.googleusercontent.com',
+    iosBundleId: 'com.scarkov.memeco',
   );
 }

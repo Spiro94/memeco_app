@@ -1,5 +1,6 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../client_providers/firebase_crashalytics/client_provider.dart';
 import '../../client_providers/sentry/client_provider.dart';
 import '../../effect_providers/mixpanel/effect_provider.dart';
 import '../base.dart';
@@ -9,15 +10,18 @@ class Auth_Repository extends Repository_Base {
     required String deepLinkBaseUri,
     required Mixpanel_EffectProvider mixpanelEffectProvider,
     required Sentry_ClientProvider sentryClientProvider,
+    required Crashalytics_ClientProvider crashalyticsClientProvider,
     required SupabaseClient supabaseClient,
   })  : _deepLinkBaseUri = deepLinkBaseUri,
         _mixpanelEffectProvider = mixpanelEffectProvider,
         _sentryClientProvider = sentryClientProvider,
+        _crashalytics_ClientProvider = crashalyticsClientProvider,
         _supabaseClient = supabaseClient;
 
   final String _deepLinkBaseUri;
   final Mixpanel_EffectProvider _mixpanelEffectProvider;
   final Sentry_ClientProvider _sentryClientProvider;
+  final Crashalytics_ClientProvider _crashalytics_ClientProvider;
   final SupabaseClient _supabaseClient;
   String get _signUpRedirectUrl => '''$_deepLinkBaseUri/#/deep/verify-email/''';
   String get _resetPasswordRedirectUrl =>
@@ -32,6 +36,7 @@ class Auth_Repository extends Repository_Base {
     final id = user?.id;
 
     await _sentryClientProvider.setUserId(userId: id);
+    await _crashalytics_ClientProvider.setUserId(userId: id);
     _mixpanelEffectProvider.getEffect().setUser(sub: id, email: email);
   }
 
