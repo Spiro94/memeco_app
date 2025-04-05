@@ -14,7 +14,7 @@ class MemeFeed_Listener_StatusChange extends StatelessWidget {
       listener: (_, state) {
         if (state.status == MemeFeed_Status.loadError) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.errorMessage!)),
+            SnackBar(content: Text(state.errorMessage ?? 'Error')),
           );
         }
       },

@@ -22,11 +22,11 @@ class MemeFeed_Bloc extends Bloc<MemeFeed_Event, MemeFeed_State>
     Emitter<MemeFeed_State> emit,
   ) async {
     try {
-      final memes = await _memeRepository.fetchMemes();
+      final memes = await _memeRepository.fetchMemesWithVotes();
 
       emit(
         state.copyWith(
-          memes: memes,
+          memesWithVotes: memes,
           status: MemeFeed_Status.loaded,
         ),
       );

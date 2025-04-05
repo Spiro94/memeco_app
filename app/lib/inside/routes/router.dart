@@ -6,6 +6,7 @@ import '../blocs/auth/bloc.dart';
 import 'authenticated/guard.dart';
 import 'authenticated/home_flow/feed/page.dart';
 import 'authenticated/home_flow/home_shell/page.dart';
+import 'authenticated/home_flow/meme_details/page.dart';
 import 'authenticated/home_flow/profile/page.dart';
 import 'authenticated/home_flow/upload/page.dart';
 import 'authenticated/reset_password/page.dart';
@@ -88,6 +89,10 @@ class Routes_router extends RootStackRouter with SharedMixin_Logging {
                 AutoRoute(path: 'upload', page: UploadMeme_Route.page),
                 AutoRoute(path: 'profile', page: Profile_Route.page),
               ],
+            ),
+            AutoRoute(
+              path: 'home/meme-details/:memeId',
+              page: MemeDetails_Route.page,
             ),
             AutoRoute(
               path: 'home/reset-password',

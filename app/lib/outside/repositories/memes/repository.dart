@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../shared/models/meme.dart';
+import '../../../shared/models/meme_with_votes.dart';
 import '../base.dart';
 
 class Meme_Repository extends Repository_Base {
@@ -21,6 +22,17 @@ class Meme_Repository extends Repository_Base {
         .order('created_at', ascending: false);
 
     return response.map(Model_Meme.fromJson).toList();
+  }
+
+  Future<List<Model_Meme_WithVotes>> fetchMemesWithVotes() async {
+    final response =
+        await _supabaseClient.rpc<List<dynamic>>('get_memes_with_votes');
+
+    return response
+        .map(
+          (json) => Model_Meme_WithVotes.fromJson(json as Map<String, dynamic>),
+        )
+        .toList();
   }
 
   Future<bool> uploadMeme({
@@ -71,6 +83,50 @@ class Meme_Repository extends Repository_Base {
     return true;
   }
 
+  /// Fetch meme details from the backend.
+  Future<Model_Meme> fetchMemeDetail(String memeId) async {
+    final response =
+        await _supabaseClient.from('memes').select().eq('id', memeId).single();
+
+    return Model_Meme.fromJson(response);
+  }
+
+  Future<Model_Meme_WithVotes> fetchMemeWithVotes({
+    required String memeId,
+  }) async {
+    final response = await _supabaseClient.rpc<Map<String, dynamic>>(
+      'get_meme_details',
+      params: {
+        'p_meme_id': memeId,
+      },
+    );
+
+    return Model_Meme_WithVotes.fromJson(response);
+  }
+
+  Future<void> likeMeme({required String memeId}) async {
+    await _supabaseClient.from('meme_votes').upsert(
+      {
+        'meme_id': memeId,
+        'user_id': _getUserId(),
+        'is_like': true,
+      },
+      onConflict: 'meme_id,user_id',
+    );
+  }
+
+  Future<void> dislikeMeme({required String memeId}) async {
+    await _supabaseClient.from('meme_votes').upsert(
+      {
+        'meme_id': memeId,
+        'user_id': _getUserId(),
+        'is_like': false,
+      },
+      onConflict: 'meme_id,user_id',
+    );
+  }
+
+  // Utility method to get the user ID from the Supabase client.
   String _getUserId() {
     final user = _supabaseClient.auth.currentUser;
     if (user == null) {

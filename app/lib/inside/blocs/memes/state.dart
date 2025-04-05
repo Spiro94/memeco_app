@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../../shared/models/meme.dart';
+import '../../../shared/models/meme_with_votes.dart';
 
 part 'state.g.dart';
 
@@ -18,22 +18,22 @@ enum MemeFeed_Status {
 final class MemeFeed_State extends Equatable {
   const MemeFeed_State({
     this.status = MemeFeed_Status.idle,
-    this.memes = const [],
+    this.memesWithVotes = const [],
     this.errorMessage,
   });
 
   final MemeFeed_Status status;
-  final List<Model_Meme> memes;
+  final List<Model_Meme_WithVotes> memesWithVotes;
   final String? errorMessage;
 
   MemeFeed_State copyWith({
     MemeFeed_Status? status,
-    List<Model_Meme>? memes,
+    List<Model_Meme_WithVotes>? memesWithVotes,
     String? errorMessage,
   }) {
     return MemeFeed_State(
       status: status ?? this.status,
-      memes: memes ?? this.memes,
+      memesWithVotes: memesWithVotes ?? this.memesWithVotes,
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }
@@ -44,5 +44,5 @@ final class MemeFeed_State extends Equatable {
   Map<String, dynamic> toJson() => _$MemeFeed_StateToJson(this);
 
   @override
-  List<Object?> get props => [status, memes, errorMessage];
+  List<Object?> get props => [status, memesWithVotes, errorMessage];
 }

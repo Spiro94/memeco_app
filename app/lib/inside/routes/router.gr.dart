@@ -107,6 +107,48 @@ class HomeShell_Route extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [MemeDetails_Page]
+class MemeDetails_Route extends PageRouteInfo<MemeDetails_RouteArgs> {
+  MemeDetails_Route({String? memeId, Key? key, List<PageRouteInfo>? children})
+    : super(
+        MemeDetails_Route.name,
+        args: MemeDetails_RouteArgs(memeId: memeId, key: key),
+        rawQueryParams: {'memeId': memeId},
+        initialChildren: children,
+      );
+
+  static const String name = 'MemeDetails_Route';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final queryParams = data.queryParams;
+      final args = data.argsAs<MemeDetails_RouteArgs>(
+        orElse:
+            () =>
+                MemeDetails_RouteArgs(memeId: queryParams.optString('memeId')),
+      );
+      return WrappedRoute(
+        child: MemeDetails_Page(memeId: args.memeId, key: args.key),
+      );
+    },
+  );
+}
+
+class MemeDetails_RouteArgs {
+  const MemeDetails_RouteArgs({this.memeId, this.key});
+
+  final String? memeId;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'MemeDetails_RouteArgs{memeId: $memeId, key: $key}';
+  }
+}
+
+/// generated route for
 /// [Profile_Page]
 class Profile_Route extends PageRouteInfo<void> {
   const Profile_Route({List<PageRouteInfo>? children})

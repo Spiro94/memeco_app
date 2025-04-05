@@ -31,7 +31,9 @@ class HomeFeed_Page extends StatelessWidget {
           child: MemeFeed_Listener_StatusChange(
             child: BlocBuilder<MemeFeed_Bloc, MemeFeed_State>(
               builder: (_, state) {
-                return MemeFeed_Widget_List(memes: state.memes);
+                return MemeFeed_Widget_List(
+                  memesWithVotes: state.memesWithVotes,
+                );
               },
             ),
           ),
