@@ -88,6 +88,10 @@ class _MemeFeed_Widget_CardState extends State<MemeFeed_Widget_Card> {
                 FButton.icon(
                   style: liked ? FButtonStyle.primary : FButtonStyle.outline,
                   onPress: () {
+                    context.read<MemeVote_Cubit>().likeMeme(
+                          meme.id,
+                          shouldDelete: liked,
+                        );
                     if (liked) {
                       setState(() {
                         likes--;
@@ -106,8 +110,6 @@ class _MemeFeed_Widget_CardState extends State<MemeFeed_Widget_Card> {
                         liked = true;
                       });
                     }
-
-                    context.read<MemeVote_Cubit>().likeMeme(meme.id);
                   },
                   child: FIcon(
                     FAssets.icons.thumbsUp,
@@ -124,6 +126,10 @@ class _MemeFeed_Widget_CardState extends State<MemeFeed_Widget_Card> {
                 FButton.icon(
                   style: disliked ? FButtonStyle.primary : FButtonStyle.outline,
                   onPress: () {
+                    context.read<MemeVote_Cubit>().dislikeMeme(
+                          meme.id,
+                          shouldDelete: disliked,
+                        );
                     if (disliked) {
                       setState(() {
                         dislikes--;
@@ -142,8 +148,6 @@ class _MemeFeed_Widget_CardState extends State<MemeFeed_Widget_Card> {
                         disliked = true;
                       });
                     }
-
-                    context.read<MemeVote_Cubit>().dislikeMeme(meme.id);
                   },
                   child: FIcon(FAssets.icons.thumbsDown),
                 ),

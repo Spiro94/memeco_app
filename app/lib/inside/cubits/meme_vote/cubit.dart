@@ -12,10 +12,16 @@ class MemeVote_Cubit extends Cubit<MemeVote_State> {
 
   final Meme_Repository _memeRepository;
 
-  Future<void> likeMeme(String memeId) async {
+  Future<void> likeMeme(
+    String memeId, {
+    bool shouldDelete = false,
+  }) async {
     emit(state.copyWith(status: MemeVote_Status.loading));
     try {
-      await _memeRepository.likeMeme(memeId: memeId);
+      await _memeRepository.likeMeme(
+        memeId: memeId,
+        shouldDeteleVote: shouldDelete,
+      );
     } catch (e) {
       emit(
         state.copyWith(
@@ -28,10 +34,16 @@ class MemeVote_Cubit extends Cubit<MemeVote_State> {
     }
   }
 
-  Future<void> dislikeMeme(String memeId) async {
+  Future<void> dislikeMeme(
+    String memeId, {
+    bool shouldDelete = false,
+  }) async {
     emit(state.copyWith(status: MemeVote_Status.loading));
     try {
-      await _memeRepository.dislikeMeme(memeId: memeId);
+      await _memeRepository.dislikeMeme(
+        memeId: memeId,
+        shouldDeteleVote: shouldDelete,
+      );
     } catch (e) {
       emit(
         state.copyWith(

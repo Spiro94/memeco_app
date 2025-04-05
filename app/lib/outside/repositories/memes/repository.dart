@@ -104,26 +104,46 @@ class Meme_Repository extends Repository_Base {
     return Model_Meme_WithVotes.fromJson(response);
   }
 
-  Future<void> likeMeme({required String memeId}) async {
-    await _supabaseClient.from('meme_votes').upsert(
-      {
-        'meme_id': memeId,
-        'user_id': _getUserId(),
-        'is_like': true,
-      },
-      onConflict: 'meme_id,user_id',
-    );
+  Future<void> likeMeme({
+    required String memeId,
+    bool shouldDeteleVote = false,
+  }) async {
+    if (shouldDeteleVote) {
+      await _supabaseClient.from('meme_votes').delete().eq(
+            'meme_id',
+            memeId,
+          );
+    } else {
+      await _supabaseClient.from('meme_votes').upsert(
+        {
+          'meme_id': memeId,
+          'user_id': _getUserId(),
+          'is_like': true,
+        },
+        onConflict: 'meme_id,user_id',
+      );
+    }
   }
 
-  Future<void> dislikeMeme({required String memeId}) async {
-    await _supabaseClient.from('meme_votes').upsert(
-      {
-        'meme_id': memeId,
-        'user_id': _getUserId(),
-        'is_like': false,
-      },
-      onConflict: 'meme_id,user_id',
-    );
+  Future<void> dislikeMeme({
+    required String memeId,
+    bool shouldDeteleVote = false,
+  }) async {
+    if (shouldDeteleVote) {
+      await _supabaseClient.from('meme_votes').delete().eq(
+            'meme_id',
+            memeId,
+          );
+    } else {
+      await _supabaseClient.from('meme_votes').upsert(
+        {
+          'meme_id': memeId,
+          'user_id': _getUserId(),
+          'is_like': false,
+        },
+        onConflict: 'meme_id,user_id',
+      );
+    }
   }
 
   // Utility method to get the user ID from the Supabase client.
