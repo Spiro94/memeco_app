@@ -93,7 +93,8 @@ class _MemeDetails_PageState extends State<MemeDetails_Page> {
                           onPress: () {
                             context.read<MemeDetails_Bloc>().add(
                                   MemeDetails_Event_Fetch(
-                                      memeId: widget.memeId!),
+                                    memeId: widget.memeId!,
+                                  ),
                                 );
                           },
                           label: const Text('Retry'),
@@ -121,7 +122,7 @@ class _MemeDetails_PageState extends State<MemeDetails_Page> {
                         style: context.theme.typography.lg,
                         textAlign: TextAlign.center,
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Row(
                         children: [
                           Text(
