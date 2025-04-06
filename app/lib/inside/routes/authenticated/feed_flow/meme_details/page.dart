@@ -12,7 +12,6 @@ import '../../../../../shared/models/meme_with_votes.dart';
 import '../../../../blocs/meme_details/bloc.dart';
 import '../../../../blocs/meme_details/events.dart';
 import '../../../../blocs/meme_details/state.dart';
-import '../../../../blocs/meme_vote/bloc.dart';
 import '../../../../util/breakpoints.dart';
 import '../../../router.dart';
 import '../../../widgets/scaffold.dart';
@@ -22,12 +21,10 @@ import 'widgets/card_actions_row.dart';
 class MemeDetails_Page extends StatelessWidget implements AutoRouteWrapper {
   const MemeDetails_Page({
     @PathParam() this.memeId,
-    this.memeVoteBloc,
     super.key,
   });
 
   final String? memeId;
-  final MemeVote_Bloc? memeVoteBloc;
 
   @override
   Widget wrappedRoute(BuildContext context) {

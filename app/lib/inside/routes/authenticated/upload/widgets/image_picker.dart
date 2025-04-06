@@ -4,7 +4,7 @@ import 'package:forui/forui.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../../../../outside/theme/theme.dart';
+import '../../../../../outside/theme/theme.dart';
 
 class MemeUpload_Widget_ImagePicker extends StatefulWidget {
   final void Function(File) onImagePicked;

@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:forui/forui.dart';
 
-import '../../../../../blocs/meme_upload/bloc.dart';
-import '../../../../../blocs/meme_upload/state.dart';
-import '../../../../../blocs/memes/bloc.dart';
-import '../../../../../blocs/memes/events.dart';
+import '../../../../blocs/meme_upload/bloc.dart';
+import '../../../../blocs/meme_upload/state.dart';
+import '../../../../blocs/memes/bloc.dart';
+import '../../../../blocs/memes/events.dart';
 
 class MemeUpload_Listener_StatusChange extends StatelessWidget {
   final Widget child;

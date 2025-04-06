@@ -5,9 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:forui/forui.dart';
 import 'package:gap/gap.dart';
 
-import '../../../../../../outside/theme/theme.dart';
-import '../../../../../blocs/meme_upload/bloc.dart';
-import '../../../../../blocs/meme_upload/state.dart';
+import '../../../../../outside/theme/theme.dart';
+import '../../../../blocs/meme_upload/bloc.dart';
+import '../../../../blocs/meme_upload/state.dart';
 import 'image_picker.dart';
 
 class MemeUpload_Widget_Form extends StatefulWidget {
