@@ -33,25 +33,46 @@ class Routes_DeepLinkHandler with SharedMixin_Logging {
     );
     log.fine('deep link fragment: $fragment');
 
-    await _authenticateUserIfPossible(
-      uri: uri,
-      deepLinkFragmentOverride: deepLinkFragmentOverride,
-    );
+    if (fragment.isNotEmpty) {
+      // Parse the fragment as a new URI
+      final fragmentUri = Uri.parse(fragment);
 
-    switch (fragment) {
-      case '/deep/reset-password/':
-        return const DeepLink.path(
-          '/home/reset-password/',
-          includePrefixMatches: true,
-        );
-      case '/deep/verify-email/':
-        return const DeepLink.path(
-          '/home/',
-          includePrefixMatches: true,
-        );
-      default:
-        return deepLink;
+      // Extract path and query parameters from the fragment URI
+      final fragmentPath = fragmentUri.path;
+      final queryParams = fragmentUri.queryParameters;
+
+      log.fine('Deep link fragment path: $fragmentPath');
+      log.fine('Deep link query parameters: $queryParams');
+
+      // Handle authentication if necessary
+      await _authenticateUserIfPossible(
+        uri: uri,
+        deepLinkFragmentOverride: deepLinkFragmentOverride,
+      );
+
+      // Navigate based on the fragment path
+      switch (fragmentPath) {
+        case '/deep/reset-password/':
+          return const DeepLink.path(
+            '/home/reset-password/',
+            includePrefixMatches: true,
+          );
+        case '/deep/verify-email/':
+          return const DeepLink.path(
+            '/home/',
+            includePrefixMatches: true,
+          );
+        case '/deep/meme':
+          final memeId = queryParams['id'] ?? 'default_id';
+          return DeepLink.path(
+            '/home/meme-details/$memeId',
+            includePrefixMatches: true,
+          );
+        default:
+          return deepLink;
+      }
     }
+    return deepLink;
   }
 
   String _getFragmentFromUri({

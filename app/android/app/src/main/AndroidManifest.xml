@@ -25,15 +25,15 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
 
+              <!-- Is this necessary? -->
+            <meta-data android:name="flutter_deeplinking_enabled" android:value="true" />
+
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <!-- TODO: Fix this -->
-                <data android:scheme="https" android:host="www.example.com" android:pathPrefix="/foo" />
+                <data android:scheme="https" android:host="memeco-d3897.web.app" />
             </intent-filter>
-            
-
 
              <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

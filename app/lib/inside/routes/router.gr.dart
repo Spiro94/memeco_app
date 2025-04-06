@@ -113,7 +113,7 @@ class MemeDetails_Route extends PageRouteInfo<MemeDetails_RouteArgs> {
     : super(
         MemeDetails_Route.name,
         args: MemeDetails_RouteArgs(memeId: memeId, key: key),
-        rawQueryParams: {'memeId': memeId},
+        rawPathParams: {'memeId': memeId},
         initialChildren: children,
       );
 
@@ -122,13 +122,14 @@ class MemeDetails_Route extends PageRouteInfo<MemeDetails_RouteArgs> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      final queryParams = data.queryParams;
+      final pathParams = data.inheritedPathParams;
       final args = data.argsAs<MemeDetails_RouteArgs>(
         orElse:
-            () =>
-                MemeDetails_RouteArgs(memeId: queryParams.optString('memeId')),
+            () => MemeDetails_RouteArgs(memeId: pathParams.optString('memeId')),
       );
-      return MemeDetails_Page(memeId: args.memeId, key: args.key);
+      return WrappedRoute(
+        child: MemeDetails_Page(memeId: args.memeId, key: args.key),
+      );
     },
   );
 }
