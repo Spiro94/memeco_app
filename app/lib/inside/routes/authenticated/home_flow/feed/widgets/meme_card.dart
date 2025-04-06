@@ -1,11 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:forui/forui.dart';
 import 'package:gap/gap.dart';
 
 import '../../../../../../outside/theme/theme.dart';
 import '../../../../../../shared/models/meme_with_votes.dart';
+import '../../../../../blocs/meme_vote/bloc.dart';
 import '../../../../router.dart';
 import 'card_actions_row.dart';
 
@@ -24,7 +26,14 @@ class MemeFeed_Widget_Card extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         context.router.navigate(
-          MemeDetails_Route(memeId: meme.id),
+          MemeDetails_Route(
+            memeId: meme.id,
+            // We send the memeVoteBloc to the MemeDetails_Page
+            // so it can be used to update the likes/dislikes
+            // and keeping the state in sync
+            // when the user votes on the meme.
+            memeVoteBloc: context.read<MemeVote_Bloc>(),
+          ),
         );
       },
       child: FCard(

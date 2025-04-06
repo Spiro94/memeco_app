@@ -5,13 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:forui/forui.dart';
 import 'package:gap/gap.dart';
 
+import '../../../../../outside/bloc_managers/meme_vote_bloc.dart';
 import '../../../../../outside/repositories/memes/repository.dart';
 import '../../../../../outside/theme/theme.dart';
+import '../../../../../shared/models/meme_with_votes.dart';
 import '../../../../blocs/meme_details/bloc.dart';
 import '../../../../blocs/meme_details/events.dart';
 import '../../../../blocs/meme_details/state.dart';
-import '../../../../cubits/meme_vote/cubit.dart';
-import '../../../../cubits/meme_vote/state.dart';
+import '../../../../blocs/meme_vote/bloc.dart';
 import '../../../../util/breakpoints.dart';
 import '../../../router.dart';
 import '../../../widgets/scaffold.dart';
@@ -21,10 +22,12 @@ import 'widgets/card_actions_row.dart';
 class MemeDetails_Page extends StatelessWidget implements AutoRouteWrapper {
   const MemeDetails_Page({
     @PathParam() this.memeId,
+    this.memeVoteBloc,
     super.key,
   });
 
   final String? memeId;
+  final MemeVote_Bloc? memeVoteBloc;
 
   @override
   Widget wrappedRoute(BuildContext context) {
@@ -35,21 +38,11 @@ class MemeDetails_Page extends StatelessWidget implements AutoRouteWrapper {
         ),
       );
     } else {
-      return MultiBlocProvider(
-        providers: [
-          BlocProvider<MemeDetails_Bloc>(
-            create: (context) => MemeDetails_Bloc(
-              memeRepository: context.read<Meme_Repository>(),
-              initialState: MemeDetails_State.initial(),
-            )..add(MemeDetails_Event_Fetch(memeId: memeId!)),
-          ),
-          BlocProvider(
-            create: (context) => MemeVote_Cubit(
-              initialState: MemeVote_State.initial(),
-              memeRepository: context.read<Meme_Repository>(),
-            ),
-          ),
-        ],
+      return BlocProvider<MemeDetails_Bloc>(
+        create: (context) => MemeDetails_Bloc(
+          memeRepository: context.read<Meme_Repository>(),
+          initialState: MemeDetails_State.initial(),
+        )..add(MemeDetails_Event_Fetch(memeId: memeId!)),
         child: this,
       );
     }
@@ -111,28 +104,21 @@ class MemeDetails_Page extends StatelessWidget implements AutoRouteWrapper {
               } else if ((state.status == MemeDetails_Status.loaded ||
                       state.status == MemeDetails_Status.idle) &&
                   state.memeWithVotes != null) {
-                final meme = state.memeWithVotes!.meme;
-                return Column(
-                  children: [
-                    Expanded(
-                      child: Hero(
-                        tag: 'meme_${meme.id}',
-                        child: CachedNetworkImage(
-                          imageUrl: meme.imageUrl,
-                          width: double.infinity,
-                          height: MediaQuery.sizeOf(context).height * 0.5,
-                        ),
-                      ),
-                    ),
-                    Gap(context.tokens.spacing.medium),
-                    Text(
-                      meme.title,
-                      style: context.theme.typography.xl,
-                      textAlign: TextAlign.center,
-                    ),
-                    const FDivider(),
-                    MemeDetails_CardActionsRow(memeWithVotes: memeWithVotes!),
-                  ],
+                // Check if the memeVoteBloc is provided
+                // If it is, use it to provide the
+                // MemeVote_Bloc to the MemeDetails_Body
+                // If not, create a new one (deeplink case)
+
+                final memeVoteBloc = MemeVoteBlocManager().getBloc(
+                  memeWithVotes!,
+                  context.read<Meme_Repository>(),
+                );
+
+                return BlocProvider.value(
+                  value: memeVoteBloc,
+                  child: MemeDetails_Body(
+                    memeWithVotes: memeWithVotes,
+                  ),
                 );
               }
               return const SizedBox();
@@ -140,6 +126,44 @@ class MemeDetails_Page extends StatelessWidget implements AutoRouteWrapper {
           ),
         ),
       ),
+    );
+  }
+}
+
+class MemeDetails_Body extends StatelessWidget {
+  const MemeDetails_Body({
+    required this.memeWithVotes,
+    super.key,
+  });
+
+  final Model_Meme_WithVotes memeWithVotes;
+
+  @override
+  Widget build(BuildContext context) {
+    final meme = memeWithVotes.meme;
+    return Column(
+      children: [
+        Expanded(
+          child: Hero(
+            tag: 'meme_${meme.id}',
+            child: CachedNetworkImage(
+              imageUrl: meme.imageUrl,
+              width: double.infinity,
+              height: MediaQuery.sizeOf(context).height * 0.5,
+            ),
+          ),
+        ),
+        Gap(context.tokens.spacing.medium),
+        Text(
+          meme.title,
+          style: context.theme.typography.xl,
+          textAlign: TextAlign.center,
+        ),
+        const FDivider(),
+        MemeDetails_CardActionsRow(
+          memeWithVotes: memeWithVotes,
+        ),
+      ],
     );
   }
 }

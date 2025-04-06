@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../shared/mixins/logging.dart';
 import '../blocs/auth/bloc.dart';
+import '../blocs/meme_vote/bloc.dart';
 import 'authenticated/guard.dart';
 import 'authenticated/home_flow/feed/page.dart';
 import 'authenticated/home_flow/home_shell/page.dart';

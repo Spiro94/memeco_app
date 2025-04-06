@@ -109,13 +109,21 @@ class HomeShell_Route extends PageRouteInfo<void> {
 /// generated route for
 /// [MemeDetails_Page]
 class MemeDetails_Route extends PageRouteInfo<MemeDetails_RouteArgs> {
-  MemeDetails_Route({String? memeId, Key? key, List<PageRouteInfo>? children})
-    : super(
-        MemeDetails_Route.name,
-        args: MemeDetails_RouteArgs(memeId: memeId, key: key),
-        rawPathParams: {'memeId': memeId},
-        initialChildren: children,
-      );
+  MemeDetails_Route({
+    String? memeId,
+    MemeVote_Bloc? memeVoteBloc,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         MemeDetails_Route.name,
+         args: MemeDetails_RouteArgs(
+           memeId: memeId,
+           memeVoteBloc: memeVoteBloc,
+           key: key,
+         ),
+         rawPathParams: {'memeId': memeId},
+         initialChildren: children,
+       );
 
   static const String name = 'MemeDetails_Route';
 
@@ -128,22 +136,28 @@ class MemeDetails_Route extends PageRouteInfo<MemeDetails_RouteArgs> {
             () => MemeDetails_RouteArgs(memeId: pathParams.optString('memeId')),
       );
       return WrappedRoute(
-        child: MemeDetails_Page(memeId: args.memeId, key: args.key),
+        child: MemeDetails_Page(
+          memeId: args.memeId,
+          memeVoteBloc: args.memeVoteBloc,
+          key: args.key,
+        ),
       );
     },
   );
 }
 
 class MemeDetails_RouteArgs {
-  const MemeDetails_RouteArgs({this.memeId, this.key});
+  const MemeDetails_RouteArgs({this.memeId, this.memeVoteBloc, this.key});
 
   final String? memeId;
+
+  final MemeVote_Bloc? memeVoteBloc;
 
   final Key? key;
 
   @override
   String toString() {
-    return 'MemeDetails_RouteArgs{memeId: $memeId, key: $key}';
+    return 'MemeDetails_RouteArgs{memeId: $memeId, memeVoteBloc: $memeVoteBloc, key: $key}';
   }
 }
 
