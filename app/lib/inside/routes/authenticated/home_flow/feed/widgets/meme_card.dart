@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:forui/forui.dart';
 import 'package:gap/gap.dart';
 
+import '../../../../../../outside/effect_providers/share_plus/effect.dart';
+import '../../../../../../outside/effect_providers/share_plus/effect_provider.dart';
 import '../../../../../../outside/theme/theme.dart';
 import '../../../../../../shared/models/meme_with_votes.dart';
 import '../../../../../cubits/meme_vote/cubit.dart';
@@ -28,12 +30,16 @@ class _MemeFeed_Widget_CardState extends State<MemeFeed_Widget_Card> {
   bool liked = false;
   bool disliked = false;
 
+  late final Share_Effect shareEffect;
+
   @override
   void initState() {
     likes = widget.memeWithVotes.likes;
     dislikes = widget.memeWithVotes.dislikes;
     liked = widget.memeWithVotes.myVote ?? false;
     disliked = widget.memeWithVotes.myVote == false;
+
+    shareEffect = context.read<Share_EffectProvider>().getEffect();
     super.initState();
   }
 
@@ -153,7 +159,11 @@ class _MemeFeed_Widget_CardState extends State<MemeFeed_Widget_Card> {
                 ),
                 const Spacer(),
                 FButton.icon(
-                  onPress: () {},
+                  onPress: () {
+                    final deepLink =
+                        'com.scarkov.memeco.deep://deeplink-callback?memeId=${meme.id}';
+                    shareEffect.shareText('Check out this meme: $deepLink');
+                  },
                   child: FIcon(FAssets.icons.share2),
                 ),
               ],

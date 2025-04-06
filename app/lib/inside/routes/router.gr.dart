@@ -128,9 +128,7 @@ class MemeDetails_Route extends PageRouteInfo<MemeDetails_RouteArgs> {
             () =>
                 MemeDetails_RouteArgs(memeId: queryParams.optString('memeId')),
       );
-      return WrappedRoute(
-        child: MemeDetails_Page(memeId: args.memeId, key: args.key),
-      );
+      return MemeDetails_Page(memeId: args.memeId, key: args.key);
     },
   );
 }

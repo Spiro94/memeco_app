@@ -20,7 +20,7 @@ class MemeVote_Cubit extends Cubit<MemeVote_State> {
     try {
       await _memeRepository.likeMeme(
         memeId: memeId,
-        shouldDeteleVote: shouldDelete,
+        shouldDeleteVote: shouldDelete,
       );
     } catch (e) {
       emit(
@@ -42,7 +42,7 @@ class MemeVote_Cubit extends Cubit<MemeVote_State> {
     try {
       await _memeRepository.dislikeMeme(
         memeId: memeId,
-        shouldDeteleVote: shouldDelete,
+        shouldDeleteVote: shouldDelete,
       );
     } catch (e) {
       emit(

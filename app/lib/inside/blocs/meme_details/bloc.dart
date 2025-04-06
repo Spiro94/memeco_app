@@ -44,8 +44,8 @@ class MemeDetails_Bloc extends Bloc<MemeDetails_Event, MemeDetails_State> {
           errorMessage: e.toString(),
         ),
       );
-    } finally {
-      emit(state.copyWith(status: MemeDetails_Status.idle));
     }
+    //No finally clause needed here as
+    //we need to show the error message in the UI
   }
 }

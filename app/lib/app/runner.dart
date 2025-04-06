@@ -15,6 +15,7 @@ import '../outside/client_providers/supabase/client_provider.dart';
 import '../outside/effect_providers/all.dart';
 import '../outside/effect_providers/auth_change/effect_provider.dart';
 import '../outside/effect_providers/mixpanel/effect_provider.dart';
+import '../outside/effect_providers/share_plus/effect_provider.dart';
 import '../outside/repositories/all.dart';
 import '../outside/repositories/auth/repository.dart';
 import '../outside/repositories/memes/repository.dart';
@@ -71,6 +72,7 @@ Future<void> appRunner({
       initialSessionId: initialSessionId,
       configuration: configuration.effectProvidersConfigurations.mixpanel,
     ),
+    shareEffectProvider: Share_EffectProvider(),
   );
   await effectProviders.initialize();
 

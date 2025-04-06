@@ -94,21 +94,23 @@ class Meme_Repository extends Repository_Base {
   Future<Model_Meme_WithVotes> fetchMemeWithVotes({
     required String memeId,
   }) async {
-    final response = await _supabaseClient.rpc<Map<String, dynamic>>(
+    final response = await _supabaseClient.rpc<List<dynamic>>(
       'get_meme_details',
       params: {
         'p_meme_id': memeId,
       },
     );
 
-    return Model_Meme_WithVotes.fromJson(response);
+    return Model_Meme_WithVotes.fromJson(
+      response.first as Map<String, dynamic>,
+    );
   }
 
   Future<void> likeMeme({
     required String memeId,
-    bool shouldDeteleVote = false,
+    bool shouldDeleteVote = false,
   }) async {
-    if (shouldDeteleVote) {
+    if (shouldDeleteVote) {
       await _supabaseClient.from('meme_votes').delete().eq(
             'meme_id',
             memeId,
@@ -127,9 +129,9 @@ class Meme_Repository extends Repository_Base {
 
   Future<void> dislikeMeme({
     required String memeId,
-    bool shouldDeteleVote = false,
+    bool shouldDeleteVote = false,
   }) async {
-    if (shouldDeteleVote) {
+    if (shouldDeleteVote) {
       await _supabaseClient.from('meme_votes').delete().eq(
             'meme_id',
             memeId,

@@ -64,6 +64,7 @@ class MocksContainer {
   final effectProviders = EffectProviders_All(
     authChangeEffectProvider: MockAuthChangeEffectProvider(),
     mixpanelEffectProvider: MockMixpanelEffectProvider(),
+    shareEffectProvider: MockShareEffectProvider(),
   );
 
   final effects = AllMockedEffects(

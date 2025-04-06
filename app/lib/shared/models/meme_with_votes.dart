@@ -24,4 +24,13 @@ class Model_Meme_WithVotes {
       myVote: json['my_vote'] as bool?,
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'meme': meme.toJson(),
+      'likes': likes,
+      'dislikes': dislikes,
+      'my_vote': myVote,
+    };
+  }
 }

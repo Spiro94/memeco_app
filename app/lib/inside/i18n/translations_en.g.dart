@@ -87,7 +87,7 @@ class TranslationsHomeEn {
 	final Translations _root; // ignore: unused_field
 
 	// Translations
-	String get title => 'Home';
+	String get title => 'Memeco';
 }
 
 // Path: profile
@@ -574,7 +574,7 @@ extension on Translations {
 			case 'forgotPassword.form.submit.label': return 'Reset Password';
 			case 'homeShell.navigationBar.home.label': return 'Home';
 			case 'homeShell.navigationBar.profile.label': return 'Profile';
-			case 'home.title': return 'Home';
+			case 'home.title': return 'Memeco';
 			case 'profile.title': return 'Profile';
 			case 'profile.actions.signOut.label': return 'Sign Out';
 			case 'profile.actions.editProfile.label': return 'Edit Profile';
