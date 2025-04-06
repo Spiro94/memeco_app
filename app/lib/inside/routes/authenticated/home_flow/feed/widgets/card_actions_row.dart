@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:forui/forui.dart';
 import 'package:gap/gap.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../../../../../../outside/effect_providers/mixpanel/effect.dart';
 import '../../../../../../outside/effect_providers/mixpanel/effect_provider.dart';
@@ -87,18 +88,37 @@ class _MemeFeed_CardActionsRowState extends State<MemeFeed_CardActionsRow> {
             ),
             const Spacer(),
             FButton.icon(
-              onPress: () {
+              onPress: () async {
                 final deepLink = DeepLinkUtils.memeDetailsUrl(meme.id);
-                shareEffect.shareText(
-                  'Check out this meme: $deepLink',
-                );
-                mixpanelEffect.trackEvent(
-                  event: 'share_meme',
+                await mixpanelEffect.trackEvent(
+                  event: 'share_meme_click',
                   properties: {
                     'meme_id': meme.id,
                     'meme_title': meme.title,
                   },
                 );
+                final result = await shareEffect.shareText(
+                  'Check out this meme: $deepLink',
+                );
+                if (result.status == ShareResultStatus.success ||
+                    result.status == ShareResultStatus.unavailable) {
+                  await mixpanelEffect.trackEvent(
+                    event: 'share_meme_success',
+                    properties: {
+                      'meme_id': meme.id,
+                      'meme_title': meme.title,
+                    },
+                  );
+                }
+                if (result.status == ShareResultStatus.dismissed) {
+                  await mixpanelEffect.trackEvent(
+                    event: 'share_meme_dismissed',
+                    properties: {
+                      'meme_id': meme.id,
+                      'meme_title': meme.title,
+                    },
+                  );
+                }
               },
               child: FIcon(FAssets.icons.share2),
             ),

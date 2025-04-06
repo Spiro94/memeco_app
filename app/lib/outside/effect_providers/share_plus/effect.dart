@@ -5,8 +5,8 @@ import '../../../shared/mixins/logging.dart';
 class Share_Effect with SharedMixin_Logging {
   const Share_Effect();
 
-  void shareText(String text, {String? subject}) {
-    Share.share(text, subject: subject);
+  Future<ShareResult> shareText(String text, {String? subject}) {
+    return Share.share(text, subject: subject);
   }
 
   void shareUrl(String url, {String? text}) {
