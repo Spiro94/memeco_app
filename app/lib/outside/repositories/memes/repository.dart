@@ -15,6 +15,12 @@ class Meme_Repository extends Repository_Base {
   @override
   Future<void> init() async {}
 
+  Stream<SupabaseStreamEvent> streamMeme() {
+    return _supabaseClient
+        .from('memes')
+        .stream(primaryKey: ['id']).order('created_at', ascending: false);
+  }
+
   Future<List<Model_Meme>> fetchMemes() async {
     final response = await _supabaseClient
         .from('memes')

@@ -149,18 +149,43 @@ class MemeDetails_RouteArgs {
 
 /// generated route for
 /// [Profile_Page]
-class Profile_Route extends PageRouteInfo<void> {
-  const Profile_Route({List<PageRouteInfo>? children})
-    : super(Profile_Route.name, initialChildren: children);
+class Profile_Route extends PageRouteInfo<Profile_RouteArgs> {
+  Profile_Route({
+    required String userId,
+    Key? key,
+    List<PageRouteInfo>? children,
+  }) : super(
+         Profile_Route.name,
+         args: Profile_RouteArgs(userId: userId, key: key),
+         rawPathParams: {'userId': userId},
+         initialChildren: children,
+       );
 
   static const String name = 'Profile_Route';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const Profile_Page();
+      final pathParams = data.inheritedPathParams;
+      final args = data.argsAs<Profile_RouteArgs>(
+        orElse: () => Profile_RouteArgs(userId: pathParams.getString('userId')),
+      );
+      return Profile_Page(userId: args.userId, key: args.key);
     },
   );
+}
+
+class Profile_RouteArgs {
+  const Profile_RouteArgs({required this.userId, this.key});
+
+  final String userId;
+
+  final Key? key;
+
+  @override
+  String toString() {
+    return 'Profile_RouteArgs{userId: $userId, key: $key}';
+  }
 }
 
 /// generated route for
@@ -286,6 +311,22 @@ class UploadMeme_Route extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const UploadMeme_Page();
+    },
+  );
+}
+
+/// generated route for
+/// [UserProfile_Page]
+class UserProfile_Route extends PageRouteInfo<void> {
+  const UserProfile_Route({List<PageRouteInfo>? children})
+    : super(UserProfile_Route.name, initialChildren: children);
+
+  static const String name = 'UserProfile_Route';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const UserProfile_Page();
     },
   );
 }

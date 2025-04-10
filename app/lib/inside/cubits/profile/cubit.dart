@@ -2,27 +2,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../outside/repositories/profile/repository.dart';
 import '../../../shared/mixins/logging.dart';
-import 'events.dart';
 import 'state.dart';
 
-class Profile_Bloc extends Bloc<Profile_Event, Profile_State>
-    with SharedMixin_Logging {
-  Profile_Bloc({
+class Profile_Cubit extends Cubit<Profile_State> with SharedMixin_Logging {
+  Profile_Cubit({
     required Profile_Repository profileRepository,
-    required Profile_State initialState,
-  })  : _profile_repository = profileRepository,
-        super(initialState) {
-    on<ProfileEvent_Load>(_onLoad);
-  }
+  })  : _profileRepository = profileRepository,
+        super(Profile_State());
 
-  final Profile_Repository _profile_repository;
+  final Profile_Repository _profileRepository;
 
-  Future<void> _onLoad(
-    ProfileEvent_Load event,
-    Emitter<Profile_State> emit,
-  ) async {
+  Future<void> fetchProfile({required String userId}) async {
     try {
-      final profile = await _profile_repository.fetchProfile();
+      final profile = await _profileRepository.fetchProfile(userId: userId);
 
       emit(
         state.copyWith(
@@ -31,7 +23,7 @@ class Profile_Bloc extends Bloc<Profile_Event, Profile_State>
         ),
       );
     } catch (e, stackTrace) {
-      log.warning('${event.runtimeType}: error', e, stackTrace);
+      log.warning('$runtimeType: error', e, stackTrace);
       emit(
         state.copyWith(
           status: Profile_Status.loadError,

@@ -14,9 +14,16 @@ class Profile_Repository extends Repository_Base {
   @override
   Future<void> init() async {}
 
-  Future<Model_Profile> fetchProfile() async {
+  Future<Model_Profile> fetchUserProfile() async {
     final response =
         await _supabaseClient.from('profiles').select().eq('id', _getUserId());
+
+    return Model_Profile.fromJson(response.first);
+  }
+
+  Future<Model_Profile> fetchProfile({required String userId}) async {
+    final response =
+        await _supabaseClient.from('profiles').select().eq('id', userId);
 
     return Model_Profile.fromJson(response.first);
   }

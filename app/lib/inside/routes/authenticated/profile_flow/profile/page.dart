@@ -9,16 +9,22 @@ import '../../../../../outside/repositories/profile/repository.dart';
 import '../../../../../outside/theme/theme.dart';
 import '../../../../blocs/auth/bloc.dart';
 import '../../../../blocs/auth/events.dart';
-import '../../../../blocs/profile/bloc.dart';
 import '../../../../cubits/meme_stats/cubit.dart';
 import '../../../../cubits/meme_stats/state.dart';
+import '../../../../cubits/profile/cubit.dart';
+import '../../../../cubits/profile/state.dart';
 import '../../../../cubits/uploaded_memes/cubit.dart';
 import '../../../../cubits/uploaded_memes/state.dart';
 import '../../../../i18n/translations.g.dart';
 
 @RoutePage()
 class Profile_Page extends StatefulWidget {
-  const Profile_Page({super.key});
+  const Profile_Page({
+    @PathParam() required this.userId,
+    super.key,
+  });
+
+  final String userId;
 
   @override
   State<Profile_Page> createState() => _Profile_PageState();
@@ -42,81 +48,100 @@ class _Profile_PageState extends State<Profile_Page>
 
   @override
   Widget build(BuildContext context) {
-    final profile = context.watch<Profile_Bloc>().state.profile;
-    return FScaffold(
-      header: FHeader(
-        title: Text(context.t.profile.title),
-        actions: [
-          FPopoverMenu(
-            popoverController: controller,
-            menuAnchor: Alignment.topRight,
-            childAnchor: Alignment.bottomRight,
-            menu: [
-              FTileGroup(
-                children: [
-                  FTile(
-                    prefixIcon: FIcon(FAssets.icons.user),
-                    title: Text(context.t.profile.actions.editProfile.label),
-                    onPress: () {},
-                  ),
-                ],
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => UploadedMemes_Cubit(
+            profileRepository: context.read<Profile_Repository>(),
+            initialState: UploadedMemes_State.initial(),
+          )..fetchUploadedMemes(userId: widget.userId),
+        ),
+        BlocProvider(
+          create: (context) => MemeStats_Cubit(
+            profileRepository: context.read<Profile_Repository>(),
+            initialState: MemeStats_State.initial(),
+          )..fetchMemeStats(userId: widget.userId),
+        ),
+        BlocProvider(
+          create: (context) => Profile_Cubit(
+            profileRepository: context.read<Profile_Repository>(),
+          )..fetchProfile(userId: widget.userId),
+        ),
+      ],
+      child: FScaffold(
+        header: FHeader(
+          title: Text(context.t.profile.title),
+          actions: [
+            FPopoverMenu(
+              popoverController: controller,
+              menuAnchor: Alignment.topRight,
+              childAnchor: Alignment.bottomRight,
+              menu: [
+                FTileGroup(
+                  children: [
+                    FTile(
+                      prefixIcon: FIcon(FAssets.icons.user),
+                      title: Text(context.t.profile.actions.editProfile.label),
+                      onPress: () {},
+                    ),
+                  ],
+                ),
+                FTileGroup(
+                  children: [
+                    FTile(
+                      prefixIcon: FIcon(FAssets.icons.logOut),
+                      title: Text(context.t.profile.actions.signOut.label),
+                      onPress: () {
+                        context.read<Auth_Bloc>().add(Auth_Event_SignOut());
+                      },
+                    ),
+                  ],
+                ),
+              ],
+              child: FHeaderAction(
+                icon: FIcon(FAssets.icons.ellipsis),
+                onPress: controller.toggle,
               ),
-              FTileGroup(
-                children: [
-                  FTile(
-                    prefixIcon: FIcon(FAssets.icons.logOut),
-                    title: Text(context.t.profile.actions.signOut.label),
-                    onPress: () {
-                      context.read<Auth_Bloc>().add(Auth_Event_SignOut());
-                    },
-                  ),
-                ],
-              ),
-            ],
-            child: FHeaderAction(
-              icon: FIcon(FAssets.icons.ellipsis),
-              onPress: controller.toggle,
             ),
-          ),
-        ],
-      ),
-      content: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => UploadedMemes_Cubit(
-              profileRepository: context.read<Profile_Repository>(),
-              initialState: UploadedMemes_State.initial(),
-            )..fetchUploadedMemes(userId: profile?.id ?? ''), //TODO: check this
-          ),
-          BlocProvider(
-            create: (context) => MemeStats_Cubit(
-              profileRepository: context.read<Profile_Repository>(),
-              initialState: MemeStats_State.initial(),
-            )..fetchMemeStats(userId: profile?.id ?? ''),
-          ),
-        ],
-        child: SingleChildScrollView(
+          ],
+        ),
+        content: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              FAvatar(
-                image: const NetworkImage(''),
-                fallback: Text(
-                  profile?.username[0].toUpperCase() ?? '',
-                  style: const TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                size: 80,
-              ),
-              Gap(context.tokens.spacing.medium),
-              Text(
-                profile?.username ?? '',
-                style: const TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.w600,
-                ),
+              BlocBuilder<Profile_Cubit, Profile_State>(
+                builder: (context, state) {
+                  if (state.status == Profile_Status.loading) {
+                    return const CircularProgressIndicator();
+                  } else if (state.status == Profile_Status.failure) {
+                    return const Text('Error loading your stats');
+                  } else if (state.status == Profile_Status.loaded) {
+                    return Column(
+                      children: [
+                        FAvatar(
+                          image: const NetworkImage(''),
+                          fallback: Text(
+                            state.profile!.username[0].toUpperCase(),
+                            style: const TextStyle(
+                              fontSize: 40,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          size: 80,
+                        ),
+                        Gap(context.tokens.spacing.medium),
+                        Text(
+                          state.profile!.username,
+                          style: const TextStyle(
+                            fontSize: 26,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    );
+                  }
+                  return const SizedBox.shrink();
+                },
               ),
               Gap(context.tokens.spacing.medium),
               BlocBuilder<MemeStats_Cubit, MemeStats_State>(

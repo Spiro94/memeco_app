@@ -11,6 +11,7 @@ import '../../../widgets/scaffold.dart';
 import 'widgets/header.dart';
 import 'widgets/listener_status_change.dart';
 import 'widgets/meme_list.dart';
+import 'widgets/new_memes_status_listener.dart';
 
 @RoutePage()
 class HomeFeed_Page extends StatelessWidget {
@@ -28,13 +29,15 @@ class HomeFeed_Page extends StatelessWidget {
                 .read<MemeFeed_Bloc>()
                 .add(const MemeFeed_Event_FetchMemes());
           },
-          child: MemeFeed_Listener_StatusChange(
-            child: BlocBuilder<MemeFeed_Bloc, MemeFeed_State>(
-              builder: (_, state) {
-                return MemeFeed_Widget_List(
-                  memesWithVotes: state.memesWithVotes,
-                );
-              },
+          child: HomeFeed_Listener_NewMemesStatus(
+            child: MemeFeed_Listener_StatusChange(
+              child: BlocBuilder<MemeFeed_Bloc, MemeFeed_State>(
+                builder: (_, state) {
+                  return MemeFeed_Widget_List(
+                    memesWithVotes: state.memesWithVotes,
+                  );
+                },
+              ),
             ),
           ),
         ),

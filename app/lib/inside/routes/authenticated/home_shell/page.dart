@@ -11,9 +11,9 @@ import '../../../blocs/meme_upload/state.dart';
 import '../../../blocs/memes/bloc.dart';
 import '../../../blocs/memes/events.dart';
 import '../../../blocs/memes/state.dart';
-import '../../../blocs/profile/bloc.dart';
-import '../../../blocs/profile/events.dart';
-import '../../../blocs/profile/state.dart';
+import '../../../cubits/new_memes_notification/cubit.dart';
+import '../../../cubits/new_memes_notification/state.dart';
+import '../../../cubits/user_profile/cubit.dart';
 import '../../../i18n/translations.g.dart';
 import '../../router.dart';
 import '../upload/widgets/form.dart';
@@ -43,10 +43,16 @@ class HomeShell_Page extends StatelessWidget implements AutoRouteWrapper {
         ),
         BlocProvider(
           lazy: false,
-          create: (context) => Profile_Bloc(
+          create: (context) => UserProfile_Cubit(
             profileRepository: context.read<Profile_Repository>(),
-            initialState: Profile_State(),
-          )..add(const ProfileEvent_Load()),
+          )..fetchProfile(),
+        ),
+        BlocProvider(
+          lazy: false,
+          create: (context) => NewMemesNotification_Cubit(
+            memeRepository: context.read<Meme_Repository>(),
+            initialState: NewMemesNotification_State.initial(),
+          ),
         ),
       ],
       child: this,
@@ -61,7 +67,7 @@ class HomeShell_Page extends StatelessWidget implements AutoRouteWrapper {
         routes: const [
           HomeFeed_Route(),
           UploadMeme_Route(),
-          Profile_Route(),
+          UserProfile_Route(),
         ],
         builder: (context, child, controller) {
           final tabsRouter = AutoTabsRouter.of(context);
