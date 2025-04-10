@@ -9,9 +9,9 @@ part of 'state.dart';
 UserUploadedMemes_State _$UserUploadedMemes_StateFromJson(
         Map<String, dynamic> json) =>
     UserUploadedMemes_State(
-      status:
-          $enumDecodeNullable(_$UploadedMemes_StatusEnumMap, json['status']) ??
-              UploadedMemes_Status.idle,
+      status: $enumDecodeNullable(
+              _$UserUploadedMemes_StatusEnumMap, json['status']) ??
+          UserUploadedMemes_Status.idle,
       memes: (json['memes'] as List<dynamic>?)
               ?.map((e) => Model_Meme.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -21,13 +21,13 @@ UserUploadedMemes_State _$UserUploadedMemes_StateFromJson(
 Map<String, dynamic> _$UserUploadedMemes_StateToJson(
         UserUploadedMemes_State instance) =>
     <String, dynamic>{
-      'status': _$UploadedMemes_StatusEnumMap[instance.status]!,
+      'status': _$UserUploadedMemes_StatusEnumMap[instance.status]!,
       'memes': instance.memes,
     };
 
-const _$UploadedMemes_StatusEnumMap = {
-  UploadedMemes_Status.idle: 'idle',
-  UploadedMemes_Status.loading: 'loading',
-  UploadedMemes_Status.loaded: 'loaded',
-  UploadedMemes_Status.error: 'error',
+const _$UserUploadedMemes_StatusEnumMap = {
+  UserUploadedMemes_Status.idle: 'idle',
+  UserUploadedMemes_Status.loading: 'loading',
+  UserUploadedMemes_Status.loaded: 'loaded',
+  UserUploadedMemes_Status.error: 'error',
 };

@@ -9,12 +9,11 @@ import '../../../../../outside/repositories/profile/repository.dart';
 import '../../../../../outside/theme/theme.dart';
 import '../../../../blocs/auth/bloc.dart';
 import '../../../../blocs/auth/events.dart';
-import '../../../../cubits/meme_stats/cubit.dart';
-import '../../../../cubits/meme_stats/state.dart';
-import '../../../../cubits/profile/cubit.dart';
-import '../../../../cubits/uploaded_memes/cubit.dart';
-import '../../../../cubits/uploaded_memes/state.dart';
+import '../../../../cubits/user_meme_stats/cubit.dart';
+import '../../../../cubits/user_meme_stats/state.dart';
 import '../../../../cubits/user_profile/cubit.dart';
+import '../../../../cubits/user_uploaded_memes/cubit.dart';
+import '../../../../cubits/user_uploaded_memes/state.dart';
 import '../../../../i18n/translations.g.dart';
 import 'widgets/meme_upload_status_listener.dart';
 
@@ -48,16 +47,16 @@ class _UserProfile_PageState extends State<UserProfile_Page>
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => UploadedMemes_Cubit(
+          create: (context) => UserUploadedMemes_Cubit(
             profileRepository: context.read<Profile_Repository>(),
-            initialState: UploadedMemes_State.initial(),
-          )..fetchUploadedMemes(userId: profile?.id ?? ''),
+            initialState: UserUploadedMemes_State.initial(),
+          )..fetchUploadedMemes(userId: profile!.id),
         ),
         BlocProvider(
-          create: (context) => MemeStats_Cubit(
+          create: (context) => UserMemeStats_Cubit(
             profileRepository: context.read<Profile_Repository>(),
-            initialState: MemeStats_State.initial(),
-          )..fetchMemeStats(userId: profile?.id ?? ''),
+            initialState: UserMemeStats_State.initial(),
+          )..fetchMemeStats(userId: profile!.id),
         ),
       ],
       child: FScaffold(
@@ -122,13 +121,13 @@ class _UserProfile_PageState extends State<UserProfile_Page>
                   ),
                 ),
                 Gap(context.tokens.spacing.medium),
-                BlocBuilder<MemeStats_Cubit, MemeStats_State>(
+                BlocBuilder<UserMemeStats_Cubit, UserMemeStats_State>(
                   builder: (context, state) {
-                    if (state.status == MemeStats_Status.loading) {
+                    if (state.status == UserMemeStats_Status.loading) {
                       return const CircularProgressIndicator();
-                    } else if (state.status == MemeStats_Status.error) {
+                    } else if (state.status == UserMemeStats_Status.error) {
                       return const Text('Error loading your stats');
-                    } else if (state.status == MemeStats_Status.loaded) {
+                    } else if (state.status == UserMemeStats_Status.loaded) {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
@@ -176,13 +175,14 @@ class _UserProfile_PageState extends State<UserProfile_Page>
                   },
                 ),
                 const FDivider(),
-                BlocBuilder<UploadedMemes_Cubit, UploadedMemes_State>(
+                BlocBuilder<UserUploadedMemes_Cubit, UserUploadedMemes_State>(
                   builder: (context, state) {
-                    if (state.status == UploadedMemes_Status.loading) {
+                    if (state.status == UserUploadedMemes_Status.loading) {
                       return const CircularProgressIndicator();
-                    } else if (state.status == UploadedMemes_Status.error) {
+                    } else if (state.status == UserUploadedMemes_Status.error) {
                       return const Text('Error loading your memes');
-                    } else if (state.status == UploadedMemes_Status.loaded) {
+                    } else if (state.status ==
+                        UserUploadedMemes_Status.loaded) {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [

@@ -4,7 +4,7 @@ import '../../../shared/models/meme.dart';
 
 part 'state.g.dart';
 
-enum UploadedMemes_Status {
+enum UserUploadedMemes_Status {
   idle,
   loading,
   loaded,
@@ -14,22 +14,22 @@ enum UploadedMemes_Status {
 @JsonSerializable()
 class UserUploadedMemes_State {
   UserUploadedMemes_State({
-    this.status = UploadedMemes_Status.idle,
+    this.status = UserUploadedMemes_Status.idle,
     this.memes = const [],
   });
 
-  final UploadedMemes_Status status;
+  final UserUploadedMemes_Status status;
   final List<Model_Meme> memes;
 
   factory UserUploadedMemes_State.initial() {
     return UserUploadedMemes_State(
-      status: UploadedMemes_Status.idle,
+      status: UserUploadedMemes_Status.idle,
       memes: [],
     );
   }
 
   UserUploadedMemes_State copyWith({
-    UploadedMemes_Status? status,
+    UserUploadedMemes_Status? status,
     List<Model_Meme>? memes,
   }) {
     return UserUploadedMemes_State(

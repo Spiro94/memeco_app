@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../blocs/meme_upload/bloc.dart';
 import '../../../../../blocs/meme_upload/state.dart';
-import '../../../../../cubits/profile/cubit.dart';
 import '../../../../../cubits/user_meme_stats/cubit.dart';
+import '../../../../../cubits/user_profile/cubit.dart';
 import '../../../../../cubits/user_uploaded_memes/cubit.dart';
 
 class Profile_Listener_MemeUpload extends StatelessWidget {
@@ -15,7 +15,7 @@ class Profile_Listener_MemeUpload extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<MemeUpload_Bloc, MemeUpload_State>(
       listener: (context, state) {
-        final userId = context.read<Profile_Cubit>().state.profile!.id;
+        final userId = context.read<UserProfile_Cubit>().state.profile!.id;
         switch (state.status) {
           case MemeUpload_Status.success:
             context.read<UserMemeStats_Cubit>().fetchMemeStats(userId: userId);

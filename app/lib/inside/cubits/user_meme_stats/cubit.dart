@@ -14,7 +14,7 @@ class UserMemeStats_Cubit extends Cubit<UserMemeStats_State> {
 
   Future<void> fetchMemeStats({required String userId}) async {
     try {
-      emit(state.copyWith(status: MemeStats_Status.loading));
+      emit(state.copyWith(status: UserMemeStats_Status.loading));
 
       final stats = await _profileRepository.fetchMemeStats(
         userId: userId,
@@ -22,12 +22,12 @@ class UserMemeStats_Cubit extends Cubit<UserMemeStats_State> {
 
       emit(
         state.copyWith(
-          status: MemeStats_Status.loaded,
+          status: UserMemeStats_Status.loaded,
           memeStats: stats,
         ),
       );
     } catch (e) {
-      emit(state.copyWith(status: MemeStats_Status.error));
+      emit(state.copyWith(status: UserMemeStats_Status.error));
     }
   }
 }

@@ -4,7 +4,7 @@ import '../../../shared/models/meme_stats.dart';
 
 part 'state.g.dart';
 
-enum MemeStats_Status {
+enum UserMemeStats_Status {
   idle,
   loading,
   loaded,
@@ -15,15 +15,15 @@ enum MemeStats_Status {
 class UserMemeStats_State {
   UserMemeStats_State({
     required this.memeStats,
-    this.status = MemeStats_Status.idle,
+    this.status = UserMemeStats_Status.idle,
   });
 
   final Model_MemeStats memeStats;
-  final MemeStats_Status status;
+  final UserMemeStats_Status status;
 
   factory UserMemeStats_State.initial() {
     return UserMemeStats_State(
-      status: MemeStats_Status.idle,
+      status: UserMemeStats_Status.idle,
       memeStats: Model_MemeStats(
         likesGiven: 0,
         memesPosted: 0,
@@ -32,7 +32,7 @@ class UserMemeStats_State {
   }
 
   UserMemeStats_State copyWith({
-    MemeStats_Status? status,
+    UserMemeStats_Status? status,
     Model_MemeStats? memeStats,
   }) {
     return UserMemeStats_State(
