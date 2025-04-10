@@ -30,12 +30,6 @@ class UserProfile_Cubit extends Cubit<UserProfile_State>
           status: UserProfile_Status.loadError,
         ),
       );
-    } finally {
-      emit(
-        state.copyWith(
-          status: UserProfile_Status.idle,
-        ),
-      );
     }
   }
 }

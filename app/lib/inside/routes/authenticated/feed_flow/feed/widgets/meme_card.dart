@@ -21,46 +21,79 @@ class MemeFeed_Widget_Card extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = context.theme;
     final meme = memeWithVotes.meme;
-    return GestureDetector(
-      onTap: () {
-        context.router.navigate(
-          MemeDetails_Route(
-            memeId: meme.id,
+    return FCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          GestureDetector(
+            onTap: () {
+              context.router.navigate(
+                Profile_Route(
+                  userId: memeWithVotes.creatorId!,
+                ),
+              );
+            },
+            child: Row(
+              children: [
+                FAvatar(
+                  image:
+                      NetworkImage(memeWithVotes.creatorProfilePicture ?? ''),
+                  fallback: Text(
+                    memeWithVotes.creatorUsername![0].toUpperCase(),
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  size: 30,
+                ),
+                Gap(context.tokens.spacing.xxSmall),
+                Text(memeWithVotes.creatorUsername!),
+              ],
+            ),
           ),
-        );
-      },
-      child: FCard(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Hero(
-              tag: 'meme_${meme.id}',
-              child: CachedNetworkImage(
-                imageUrl: meme.imageUrl,
-                width: double.infinity,
-                height: 200,
-                fit: BoxFit.fitHeight,
-              ),
+          GestureDetector(
+            onTap: () {
+              context.router.navigate(
+                MemeDetails_Route(
+                  memeId: meme.id,
+                ),
+              );
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Gap(context.tokens.spacing.medium),
+                Hero(
+                  tag: 'meme_${meme.id}',
+                  child: CachedNetworkImage(
+                    imageUrl: meme.imageUrl,
+                    width: double.infinity,
+                    height: 200,
+                    fit: BoxFit.fitHeight,
+                  ),
+                ),
+                Gap(context.tokens.spacing.medium),
+                Text(
+                  meme.title,
+                  style: theme.typography.base.copyWith(
+                    fontWeight: FontWeight.w500,
+                    color: theme.colorScheme.foreground,
+                    height: 1.5,
+                  ),
+                ),
+                Gap(context.tokens.spacing.xxSmall),
+                Text(
+                  formatDate(meme.createdAt),
+                  style: theme.typography.sm
+                      .copyWith(color: theme.colorScheme.mutedForeground),
+                ),
+                const FDivider(),
+                MemeFeed_CardActionsRow(memeWithVotes: memeWithVotes),
+              ],
             ),
-            Gap(context.tokens.spacing.medium),
-            Text(
-              meme.title,
-              style: theme.typography.base.copyWith(
-                fontWeight: FontWeight.w500,
-                color: theme.colorScheme.foreground,
-                height: 1.5,
-              ),
-            ),
-            Gap(context.tokens.spacing.xxSmall),
-            Text(
-              formatDate(meme.createdAt),
-              style: theme.typography.sm
-                  .copyWith(color: theme.colorScheme.mutedForeground),
-            ),
-            const FDivider(),
-            MemeFeed_CardActionsRow(memeWithVotes: memeWithVotes),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

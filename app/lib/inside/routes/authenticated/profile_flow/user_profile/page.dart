@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:forui/forui.dart';
 import 'package:gap/gap.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../../../outside/repositories/profile/repository.dart';
 import '../../../../../outside/theme/theme.dart';
@@ -211,7 +212,15 @@ class _UserProfile_PageState extends State<UserProfile_Page>
                                 imageUrl: meme.imageUrl,
                                 fit: BoxFit.cover,
                                 placeholder: (context, url) =>
-                                    const CircularProgressIndicator(),
+                                    Shimmer.fromColors(
+                                  baseColor: Colors.grey[300]!,
+                                  highlightColor: Colors.grey[100]!,
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    color: Colors.white,
+                                  ),
+                                ),
                                 errorWidget: (context, url, error) =>
                                     const Icon(Icons.error),
                               );

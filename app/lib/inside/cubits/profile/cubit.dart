@@ -29,12 +29,6 @@ class Profile_Cubit extends Cubit<Profile_State> with SharedMixin_Logging {
           status: Profile_Status.loadError,
         ),
       );
-    } finally {
-      emit(
-        state.copyWith(
-          status: Profile_Status.idle,
-        ),
-      );
     }
   }
 }

@@ -101,11 +101,6 @@ class MemeDetails_Page extends StatelessWidget implements AutoRouteWrapper {
               } else if ((state.status == MemeDetails_Status.loaded ||
                       state.status == MemeDetails_Status.idle) &&
                   state.memeWithVotes != null) {
-                // Check if the memeVoteBloc is provided
-                // If it is, use it to provide the
-                // MemeVote_Bloc to the MemeDetails_Body
-                // If not, create a new one (deeplink case)
-
                 final memeVoteBloc = MemeVoteBlocManager().getBloc(
                   memeWithVotes!,
                   context.read<Meme_Repository>(),

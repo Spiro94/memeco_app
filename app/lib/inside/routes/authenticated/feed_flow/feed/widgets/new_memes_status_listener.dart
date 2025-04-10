@@ -21,7 +21,7 @@ class HomeFeed_Listener_NewMemesStatus extends StatelessWidget {
         if (state.hasNewMemes) {
           final overlay = Overlay.of(context);
           final overlayEntry = OverlayEntry(
-            builder: (context) => Positioned(
+            builder: (overlayContext) => Positioned(
               top: 50,
               left: 16,
               right: 16,

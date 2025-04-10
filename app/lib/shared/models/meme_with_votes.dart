@@ -5,11 +5,17 @@ class Model_Meme_WithVotes {
   final int likes;
   final int dislikes;
   final bool? myVote;
+  final String? creatorUsername;
+  final String? creatorProfilePicture;
+  final String? creatorId;
 
   Model_Meme_WithVotes({
     required this.meme,
     required this.likes,
     required this.dislikes,
+    this.creatorUsername,
+    this.creatorProfilePicture,
+    this.creatorId,
     this.myVote,
   });
 
@@ -22,6 +28,9 @@ class Model_Meme_WithVotes {
       likes: json['likes'] as int,
       dislikes: json['dislikes'] as int,
       myVote: json['my_vote'] as bool?,
+      creatorUsername: json['creator_username'] as String?,
+      creatorProfilePicture: json['creator_profile_picture'] as String?,
+      creatorId: json['creator_id'] as String?,
     );
   }
 

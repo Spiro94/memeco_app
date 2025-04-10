@@ -127,7 +127,12 @@ class HomeShell_Page extends StatelessWidget implements AutoRouteWrapper {
                 children: [
                   FBottomNavigationBarItem(
                     icon: FIcon(FAssets.icons.house),
-                    label: Text(context.t.homeShell.navigationBar.home.label),
+                    label: Text(
+                      context.t.homeShell.navigationBar.home.label,
+                      style: const TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
                   ),
                   FBottomNavigationBarItem(
                     icon: CircleAvatar(
@@ -155,8 +160,12 @@ class HomeShell_Page extends StatelessWidget implements AutoRouteWrapper {
                   ),
                   FBottomNavigationBarItem(
                     icon: FIcon(FAssets.icons.user),
-                    label:
-                        Text(context.t.homeShell.navigationBar.profile.label),
+                    label: Text(
+                      context.t.homeShell.navigationBar.profile.label,
+                      style: const TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
                   ),
                 ],
               ),
