@@ -26,6 +26,7 @@ class MemeFeed_Widget_Card extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           GestureDetector(
+            behavior: HitTestBehavior.translucent,
             onTap: () {
               context.router.navigate(
                 Profile_Route(
