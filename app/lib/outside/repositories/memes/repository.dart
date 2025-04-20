@@ -4,6 +4,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../shared/models/meme.dart';
 import '../../../shared/models/meme_with_votes.dart';
+import '../../utils/constants.dart';
 import '../base.dart';
 
 class Meme_Repository extends Repository_Base {
@@ -33,6 +34,44 @@ class Meme_Repository extends Repository_Base {
   Future<List<Model_Meme_WithVotes>> fetchMemesWithVotes() async {
     final response =
         await _supabaseClient.rpc<List<dynamic>>('get_memes_with_votes');
+
+    return response
+        .map(
+          (json) => Model_Meme_WithVotes.fromJson(json as Map<String, dynamic>),
+        )
+        .toList();
+  }
+
+  Future<List<Model_Meme_WithVotes>> fetchMemesWithVotesPaginated({
+    String? cursor,
+  }) async {
+    final response = await _supabaseClient.rpc<List<dynamic>>(
+      'get_memes_with_votes_paginated',
+      params: {
+        'p_page_size': pageSize,
+        'p_cursor': cursor,
+        'p_newer_than': null,
+      },
+    );
+
+    return response
+        .map(
+          (json) => Model_Meme_WithVotes.fromJson(json as Map<String, dynamic>),
+        )
+        .toList();
+  }
+
+  Future<List<Model_Meme_WithVotes>> fetchMemesWithVotesNewer(
+    String newerThan,
+  ) async {
+    final response = await _supabaseClient.rpc<List<dynamic>>(
+      'get_memes_with_votes_paginated',
+      params: {
+        'p_page_size': pageSize,
+        'p_cursor': null,
+        'p_newer_than': newerThan,
+      },
+    );
 
     return response
         .map(

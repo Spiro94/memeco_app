@@ -32,7 +32,7 @@ class HomeShell_Page extends StatelessWidget implements AutoRouteWrapper {
           create: (_) => MemeFeed_Bloc(
             memeRepository: context.read<Meme_Repository>(),
             initialState: const MemeFeed_State(),
-          )..add(const MemeFeed_Event_FetchMemes()),
+          )..add(const MemeFeed_Event_FetchInitialPage()),
         ),
         BlocProvider(
           lazy: false,

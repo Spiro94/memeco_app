@@ -27,7 +27,11 @@ class HomeFeed_Page extends StatelessWidget {
           onRefresh: () async {
             context
                 .read<MemeFeed_Bloc>()
-                .add(const MemeFeed_Event_FetchMemes());
+                .add(const MemeFeed_Event_RefreshPage());
+
+            await context.read<MemeFeed_Bloc>().stream.firstWhere(
+                  (s) => s.status != MemeFeed_Status.refreshing,
+                );
           },
           child: HomeFeed_Listener_NewMemesStatus(
             child: MemeFeed_Listener_StatusChange(

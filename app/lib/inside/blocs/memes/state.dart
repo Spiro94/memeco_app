@@ -12,6 +12,8 @@ enum MemeFeed_Status {
   loadError,
   success,
   failure,
+
+  refreshing,
 }
 
 @JsonSerializable()
@@ -19,21 +21,29 @@ final class MemeFeed_State extends Equatable {
   const MemeFeed_State({
     this.status = MemeFeed_Status.idle,
     this.memesWithVotes = const [],
+    this.cursor,
+    this.newestCursor,
     this.errorMessage,
   });
 
   final MemeFeed_Status status;
   final List<Model_Meme_WithVotes> memesWithVotes;
+  final DateTime? cursor;
+  final DateTime? newestCursor;
   final String? errorMessage;
 
   MemeFeed_State copyWith({
     MemeFeed_Status? status,
     List<Model_Meme_WithVotes>? memesWithVotes,
+    DateTime? Function()? setNewestcursor,
+    DateTime? Function()? setCursor,
     String? errorMessage,
   }) {
     return MemeFeed_State(
       status: status ?? this.status,
       memesWithVotes: memesWithVotes ?? this.memesWithVotes,
+      cursor: setCursor != null ? setCursor() : cursor,
+      newestCursor: setNewestcursor != null ? setNewestcursor() : newestCursor,
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }
