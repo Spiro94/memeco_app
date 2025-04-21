@@ -29,7 +29,7 @@ class HomeFeed_Listener_NewMemesStatus extends StatelessWidget {
                 onTap: () {
                   context
                       .read<MemeFeed_Bloc>()
-                      .add(const MemeFeed_Event_FetchMemes());
+                      .add(const MemeFeed_Event_RefreshPage());
                 },
                 child: FAlert(
                   title: const Text('New memes available!'),

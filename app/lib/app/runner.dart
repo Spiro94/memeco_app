@@ -7,6 +7,7 @@ import 'package:logging/logging.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:uuid/uuid.dart';
 
+import '../firebase_options.dart';
 import '../inside/blocs/observer.dart';
 import '../outside/client_providers/all.dart';
 import '../outside/client_providers/firebase_crashalytics/client_provider.dart';
@@ -37,7 +38,9 @@ Future<void> appRunner({
 
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   // Create initial sessionId
   final initialSessionId = const Uuid().v4();

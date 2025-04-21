@@ -45,7 +45,8 @@ class Profile_Repository extends Repository_Base {
         .from('memes')
         .select()
         .eq('creator_id', creatorId)
-        .order('created_at', ascending: false);
+        .order('created_at', ascending: false)
+        .limit(30);
 
     return response.map(Model_Meme.fromJson).toList();
   }

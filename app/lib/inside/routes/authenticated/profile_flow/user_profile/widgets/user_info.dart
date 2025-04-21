@@ -7,8 +7,8 @@ import '../../../../../../shared/models/profile.dart';
 
 class UserProfile_UserInfo extends StatelessWidget {
   const UserProfile_UserInfo({
-    super.key,
     required this.profile,
+    super.key,
   });
 
   final Model_Profile? profile;

@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -46,19 +49,9 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAVk9_-UJh39uBDkpmEfsjb8VrDhjOBNr8',
-    appId: '1:596013733093:web:9cf3e0b36ae37bd1dc300c',
-    messagingSenderId: '596013733093',
-    projectId: 'memeco-d3897',
-    authDomain: 'memeco-d3897.firebaseapp.com',
-    storageBucket: 'memeco-d3897.appspot.com',
-    measurementId: 'G-9SM9CB7ZCX',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyA1ktT6xxjnsaUIBU4-kJf1s9NeWAqij3Y',
-    appId: '1:596013733093:android:b45ba34030b51819dc300c',
+    appId: '1:596013733093:android:15dc83c8c3905664dc300c',
     messagingSenderId: '596013733093',
     projectId: 'memeco-d3897',
     storageBucket: 'memeco-d3897.appspot.com',
@@ -66,14 +59,12 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBrxm0zAwpxlLcD7lFtj4HQ2IoMt3RDKFM',
-    appId: '1:596013733093:ios:6f72f014d26bb6bbdc300c',
+    appId: '1:596013733093:ios:5a05b1fe6bff3d34dc300c',
     messagingSenderId: '596013733093',
     projectId: 'memeco-d3897',
     storageBucket: 'memeco-d3897.appspot.com',
-    androidClientId:
-        '596013733093-08nn814klrjblrpdb6ofrcsh5tfvoul1.apps.googleusercontent.com',
-    iosClientId:
-        '596013733093-7ntfd1jeq2jh8bpe3ad1j3q72rvrj90d.apps.googleusercontent.com',
+    androidClientId: '596013733093-08nn814klrjblrpdb6ofrcsh5tfvoul1.apps.googleusercontent.com',
+    iosClientId: '596013733093-ta4rthdgqicgku3u4ro695898d6vtokm.apps.googleusercontent.com',
     iosBundleId: 'com.scarkov.memeco',
   );
 }

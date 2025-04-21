@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:logging/logging.dart' as logging;
 
 import '../../inside/i18n/translations.g.dart';
@@ -8,15 +7,12 @@ import '../../outside/theme/theme.dart';
 import '../runner.dart';
 import 'configuration.dart';
 
-// TODO: update CHANGE_ME lines
-
 void main() {
   final configuration = AppConfiguration(
     appLocale: AppLocale.en,
     logLevel: logging.Level.INFO,
     theme: OutsideThemes.lightTheme,
-    deepLinkBaseUri:
-        kIsWeb ? 'CHANGE_ME' : 'com.scarkov.memeco.deep://deeplink-callback',
+    deepLinkBaseUri: 'com.scarkov.memeco.deep://deeplink-callback',
     clientProvidersConfigurations: ClientProvidersConfigurations(
       sentry: null, // Using Crashlytics instead
       supabase: const Supabase_ClientProvider_Configuration(
